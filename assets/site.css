@@ -111,22 +111,22 @@ h2 { font-size: clamp(26px, 3.4vw, 34px); line-height: 1.3; margin: 0 0 10px; }
 /* principles */
 .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; counter-reset: p; }
 @media (max-width: 800px) { .principles { grid-template-columns: 1fr; } }
-.principle { border-top: 2px solid var(--accent); padding-top: 16px; }
+.principle { border-top: 1px solid var(--line); padding-top: 16px; }
 .principle h3 { font-size: 18px; line-height: 1.5; margin: 0 0 8px; }
 .principle p { margin: 0; color: var(--muted); font-size: 15.5px; }
 .threads { margin-top: 40px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 26px; }
 .threads h3 { margin: 0 0 10px; font-size: 18px; }
 .threads ul { margin: 0; padding-left: 1.2em; }
 .threads li { margin-bottom: 6px; }
-.threads li small { font-family: var(--mono); color: var(--muted); font-size: 12.5px; }
+.threads li small { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
 
 /* about */
 .about { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
 @media (max-width: 800px) { .about { grid-template-columns: 1fr; gap: 28px; } }
 .about h3 { font-size: 18px; margin: 0 0 14px; }
 .timeline { list-style: none; margin: 0; padding: 0; }
-.timeline li { padding: 0 0 18px 18px; border-left: 2px solid var(--line); position: relative; }
-.timeline li::before { content: ""; position: absolute; left: -6px; top: 9px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+.timeline li { padding: 0 0 18px 18px; border-left: 1px solid var(--line); position: relative; }
+.timeline li::before { content: ""; position: absolute; left: -6px; top: 9px; width: 10px; height: 10px; border-radius: 50%; background: var(--muted); }
 .timeline b { display: block; }
 .timeline span { color: var(--muted); font-size: 15px; }
 .stack { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }

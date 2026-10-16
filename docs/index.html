@@ -17,13 +17,13 @@
 
   .toc { position: sticky; top: 82px; align-self: start; font-size: 15px; }
   @media (max-width: 860px) { .toc { position: static; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; } }
-  .toc p { font-size: 12.5px; font-family: var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin: 0 0 6px; }
+  .toc p { font-size: 13px; font-weight: 600; color: var(--muted); margin: 0 0 6px; }
   .toc p + ol, .toc ol + p { margin-top: 0; }
   .toc ol { list-style: none; margin: 0 0 22px; padding: 0; }
   .toc li { margin: 0; }
-  .toc a { display: block; padding: 4px 0 4px 12px; border-left: 2px solid var(--line); color: var(--muted); text-decoration: none; line-height: 1.5; }
+  .toc a { display: block; padding: 4px 0 4px 12px; border-left: 1px solid var(--line); color: var(--muted); text-decoration: none; line-height: 1.5; }
   .toc a:hover { color: var(--text); }
-  .toc a.active { color: var(--accent); border-left-color: var(--accent); }
+  .toc a.active { color: var(--accent); border-left-color: var(--accent); font-weight: 600; }
 
   .content { min-width: 0; }
   .intro h1 { font-size: clamp(30px, 4.6vw, 44px); margin-bottom: 12px; }
@@ -37,8 +37,8 @@
   article p, article li { max-width: 720px; }
   article ul, article ol { padding-left: 1.3em; }
   article li { margin-bottom: 6px; }
-  .group-title { max-width: 72ch; margin: 64px 0 0; padding: 14px 18px; border-radius: var(--radius); background: var(--accent-soft); color: var(--text); font-size: 15px; }
-  .group-title b { color: var(--accent); }
+  .group-title { max-width: 72ch; margin: 64px 0 0; padding: 14px 18px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); color: var(--text); font-size: 15px; }
+  .group-title b { color: var(--text); }
 
   pre { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; overflow-x: auto; font: 13.5px/1.65 var(--mono); margin: 14px 0 18px; }
   pre code { background: none; padding: 0; font-size: inherit; }
@@ -47,7 +47,7 @@
   th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
   th { font-weight: 600; font-size: 14px; color: var(--muted); }
   tr:last-child td { border-bottom: 0; }
-  .callout { border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line)); background: color-mix(in srgb, var(--accent-soft) 60%, var(--surface)); padding: 14px 18px; border-radius: 10px; margin: 18px 0; max-width: 720px; }
+  .callout { border: 1px solid var(--line); background: var(--surface); padding: 14px 18px; border-radius: 10px; margin: 18px 0; max-width: 720px; }
   .callout.warn { border-color: color-mix(in srgb, var(--warn) 35%, var(--line)); background: color-mix(in srgb, var(--warn) 8%, var(--surface)); }
   .callout b:first-child { display: block; margin-bottom: 2px; }
   .do-dont { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 14px 0; }
