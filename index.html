@@ -32,13 +32,13 @@
 <main id="top">
   <header class="hero">
     <div class="wrap">
-      <p class="eyebrow">Automation QA Engineer · Playwright + TypeScript</p>
       <h1>ศุภากร เศวตวงศ์สกุล</h1>
+      <p class="role">Automation QA Engineer · Playwright + TypeScript</p>
       <p class="lede">ผมเขียน end-to-end test automation ที่ทีมดูแลต่อได้จริง และให้ความสำคัญกับ<strong>การออกแบบเทส</strong>พอๆ กับโค้ดเทส ก่อนย้ายมาสาย QA ผมเป็น frontend developer อยู่ 1 ปี ซึ่งเป็นช่วงที่ได้เห็นกับตาว่าแอปพังด้วยสาเหตุอะไรบ้าง</p>
       <ul class="meta">
-        <li>📍 สมุทรสงคราม</li>
-        <li>🎓 วศ.บ. เทคโนโลยีวิศวกรรมอิเล็กทรอนิกส์ — มจพ.</li>
-        <li>🎯 เป้าหมายถัดไป: SDET / QA Lead</li>
+        <li>สมุทรสงคราม</li>
+        <li>วศ.บ. เทคโนโลยีวิศวกรรมอิเล็กทรอนิกส์ — มจพ.</li>
+        <li>เป้าหมายถัดไป: SDET / QA Lead</li>
       </ul>
       <div class="actions">
         <a class="btn primary" href="#work">ดูผลงาน</a>
@@ -49,12 +49,7 @@
   </header>
 
   <div class="wrap">
-    <div class="stats" role="list" aria-label="ภาพรวมผลงาน">
-      <div class="stat" role="listitem"><b id="stat-total">358</b><span id="stat-total-label">automated tests</span></div>
-      <div class="stat" role="listitem"><b>4</b><span>repo พร้อม CI</span></div>
-      <div class="stat" role="listitem"><b>7</b><span>CI workflow</span></div>
-      <div class="stat" role="listitem"><b>8</b><span>case study บั๊กจริง</span></div>
-    </div>
+    <p class="proof"><b id="stat-total">358</b><span id="stat-total-label">automated tests</span> ใน 4 repo · 7 CI workflow · 8 case study จากระบบจริง</p>
     <p class="stats-note" id="stats-note" hidden><span class="dot" aria-hidden="true"></span><span></span></p>
   </div>
 
@@ -137,44 +132,44 @@
       <p class="section-lede">โค้ดของระบบลูกค้าเอามาแสดงไม่ได้ แต่<strong>วิธีคิดตอนไล่หาสาเหตุ</strong>เล่าได้ ทุกเคสเรียงตามลำดับเดียวกัน: อาการ → ตามรอย → สาเหตุราก → แก้ → ยืนยัน → บทเรียน</p>
       <div class="cases">
         <a class="case" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/01-auth-race-condition.md">
-          <span class="id">CS-01</span>
           <h3>login ล้มแบบสุ่ม 1 ใน N ครั้ง — race condition ระหว่าง session สองเส้น</h3>
           <p>แยกให้ออกว่า "เทสไม่นิ่ง" หรือ "ระบบไม่นิ่ง" ก่อนใส่ retry</p>
+          <span class="id">CS-01</span>
         </a>
         <a class="case" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/02-role-silent-failures.md">
-          <span class="id">CS-02</span>
           <h3>เพิ่ม role ใหม่ 1 ตัว พังเงียบ 6 จุด</h3>
           <p>decision table (role × หน้าจอ), เคส refresh / deep link</p>
+          <span class="id">CS-02</span>
         </a>
         <a class="case" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/03-slot-leak.md">
-          <span class="id">CS-03</span>
           <h3>คิวเต็มทั้งที่งานยกเลิกแล้ว — ที่นั่งค้าง 640 รายการ</h3>
           <p>state-transition testing, remediation แบบ idempotent</p>
+          <span class="id">CS-03</span>
         </a>
         <a class="case" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/04-tenant-isolation.md">
-          <span class="id">CS-04</span>
           <h3>กันข้อมูลข้ามองค์กรรั่ว — ทดสอบ 3 ชั้น เจอบั๊กครบ 3 ชั้น</h3>
           <p>negative testing, rules test บน emulator (91 เคส), defense in depth</p>
+          <span class="id">CS-04</span>
         </a>
         <a class="case" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/05-zombie-service-worker.md">
-          <span class="id">CS-05</span>
           <h3>deploy แล้วบางเครื่องเห็นหน้าเก่า — service worker ที่ตายไม่ลง</h3>
           <p>แยกตัวแปรด้วย incognito, ยืนยันที่ HTTP header</p>
+          <span class="id">CS-05</span>
         </a>
         <a class="case" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/06-mobile-only-unclickable-button.md">
-          <span class="id">CS-06</span>
           <h3>ปุ่มที่ "มองเห็น" แต่ "กดไม่ได้" และเกิดเฉพาะบนมือถือ</h3>
           <p>hit-testing แทน visibility, ทดสอบแยกตามขนาดจอ</p>
+          <span class="id">CS-06</span>
         </a>
         <a class="case" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/07-legacy-escape-hatches.md">
-          <span class="id">CS-07</span>
           <h3>สิทธิ์ของระบบรุ่นเก่าที่ลืมปิด — คนไม่ล็อกอินอ่านข้อมูลลูกค้าได้ทั้งหมด</h3>
           <p>security rules review, mutation check (กฎเดิมแดง 15 เคส), blast radius</p>
+          <span class="id">CS-07</span>
         </a>
         <a class="case" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/08-test-blamed-the-system.md">
-          <span class="id">CS-08</span>
           <h3>เทสฟ้องว่า "จองซ้อนได้" ทั้งที่ระบบถูก — บั๊กของเทส 4 ชั้น</h3>
           <p>ยิง API ตรงแยกระบบออกจากเทส, event-driven assertion, test-data isolation</p>
+          <span class="id">CS-08</span>
         </a>
       </div>
     </div>
@@ -315,8 +310,7 @@
     // falls back to tests run for suites that don't report it.
     const total = all.reduce((n, r) => n + (r.inventory ?? r.total ?? 0), 0)
     document.getElementById('stat-total').textContent = fmt.format(total)
-    document.getElementById('stat-total-label').textContent = 'automated tests · ข้อมูลสด'
-    const note = document.getElementById('stats-note')
+        const note = document.getElementById('stats-note')
     const newest = all.map((r) => r.updatedAt).filter(Boolean).sort().pop()
     note.lastElementChild.textContent = `ดึงจาก Firestore — CI ของแต่ละ repo อัปเดตทุกครั้งที่ push เข้า main · ล่าสุด ${ago(newest)}`
     note.hidden = false

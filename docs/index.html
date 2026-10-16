@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Docs — ศุภากร เศวตวงศ์สกุล</title>
-<meta name="description" content="ความรู้ด้าน test automation จากงานจริง — เทคนิคออกแบบเทส, flake playbook, การทดสอบ security rules, Playwright Test Agents และ runbook ของเว็บนี้">
+<meta name="description" content="ความรู้ด้าน test automation จากงานจริง: เทคนิคออกแบบเทส, flake playbook, การทดสอบ security rules, Playwright Test Agents และ runbook ของเว็บนี้">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -29,16 +29,15 @@
   .intro h1 { font-size: clamp(30px, 4.6vw, 44px); margin-bottom: 12px; }
   .intro p { color: var(--muted); max-width: 680px; }
   .audience { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 8px; }
-  .audience span { font-size: 14px; border: 1px solid var(--line); border-radius: 999px; padding: 4px 14px; background: var(--surface); }
+  .audience span { font-size: 14px; border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; background: var(--surface); }
 
   article { padding: 48px 0 8px; border-top: 1px solid var(--line); margin-top: 40px; scroll-margin-top: 70px; }
-  article .kicker { font-family: var(--mono); font-size: 13px; color: var(--accent); margin: 0 0 6px; }
   article h2 { margin-bottom: 14px; }
   article h3 { font-size: 19px; margin: 30px 0 8px; line-height: 1.5; }
   article p, article li { max-width: 720px; }
   article ul, article ol { padding-left: 1.3em; }
   article li { margin-bottom: 6px; }
-  .group-title { margin: 64px 0 0; padding: 14px 18px; border-radius: var(--radius); background: var(--accent-soft); color: var(--text); font-size: 15px; }
+  .group-title { max-width: 72ch; margin: 64px 0 0; padding: 14px 18px; border-radius: var(--radius); background: var(--accent-soft); color: var(--text); font-size: 15px; }
   .group-title b { color: var(--accent); }
 
   pre { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; overflow-x: auto; font: 13.5px/1.65 var(--mono); margin: 14px 0 18px; }
@@ -48,15 +47,15 @@
   th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
   th { font-weight: 600; font-size: 14px; color: var(--muted); }
   tr:last-child td { border-bottom: 0; }
-  .callout { border-left: 3px solid var(--accent); background: var(--surface); padding: 12px 16px; border-radius: 0 10px 10px 0; margin: 16px 0; max-width: 720px; }
-  .callout.warn { border-left-color: var(--warn); }
+  .callout { border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line)); background: color-mix(in srgb, var(--accent-soft) 60%, var(--surface)); padding: 14px 18px; border-radius: 10px; margin: 18px 0; max-width: 720px; }
+  .callout.warn { border-color: color-mix(in srgb, var(--warn) 35%, var(--line)); background: color-mix(in srgb, var(--warn) 8%, var(--surface)); }
   .callout b:first-child { display: block; margin-bottom: 2px; }
   .do-dont { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 14px 0; }
   @media (max-width: 640px) { .do-dont { grid-template-columns: minmax(0, 1fr); } }
   .do-dont > div { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; background: var(--surface); }
   .do-dont .label { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
   .do-dont .yes .label { color: var(--accent); }
-  .do-dont .no .label { color: #d64545; }
+  .do-dont .no .label { color: var(--bad); }
   .do-dont pre { margin: 0; border: 0; padding: 0; background: none; }
   .flow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 18px 0; }
   .flow span { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; font-size: 14px; }
@@ -101,25 +100,24 @@
     <header class="intro">
       <h1>Docs</h1>
       <p>บันทึกความรู้จากงานจริง ทุกตัวอย่างมาจาก repo ของผมเองหรือ case study ที่เกิดขึ้นจริง ไม่ใช่ตัวอย่างสมมติ ครึ่งแรกเขียนให้คนที่สนใจ test automation อ่าน ครึ่งหลังเป็น runbook ของเว็บนี้ ซึ่งเปิดไว้ให้ดูด้วยเพราะมันคือตัวอย่างการทำ CI → ฐานข้อมูลแบบไม่ใช้ key</p>
-      <div class="audience"><span>🧪 คนที่อยากเรียน QA / automation</span><span>👀 recruiter ที่อยากเห็นวิธีคิด</span><span>🛠 ตัวผมเองตอนต้องแก้ระบบ</span></div>
+      <div class="audience"><span>คนที่อยากเรียน QA / automation</span><span>recruiter ที่อยากเห็นวิธีคิด</span><span>ตัวผมเองตอนต้องแก้ระบบ</span></div>
     </header>
 
     <!-- ───────────────────────── Knowledge ───────────────────────── -->
 
     <article id="test-design">
-      <p class="kicker">ความรู้ · 01</p>
       <h2>เทคนิคออกแบบเทส</h2>
       <p>เทสที่ดีตอบได้ว่า "ทำไมต้องเป็นค่านี้" ทุกตัว ถ้าตอบไม่ได้ มักเป็นการไล่คลิกแล้วบันทึกไว้ ซึ่งได้จำนวนเทสเยอะแต่จับบั๊กได้น้อย สี่เทคนิคนี้ใช้บ่อยที่สุดในงานของผม</p>
 
-      <h3>Equivalence partitioning — ค่าในกลุ่มเดียวกันให้ผลเหมือนกัน ทดสอบตัวแทนตัวเดียวพอ</h3>
+      <h3>Equivalence partitioning: ค่าในกลุ่มเดียวกันให้ผลเหมือนกัน ทดสอบตัวแทนตัวเดียวพอ</h3>
       <p>แบ่ง input เป็นกลุ่มที่ระบบควรปฏิบัติเหมือนกัน แล้วเลือกตัวแทนกลุ่มละหนึ่งค่า ประหยัดเทสโดยไม่เสียความครอบคลุม</p>
       <p><b>ตัวอย่างจริง:</b> ใน <code>qa-automation</code> เทส <code>GET /posts?userId=1</code> ใช้ user คนเดียวแทน user ทุกคน เพราะ user ที่มีอยู่ทุกคนอยู่กลุ่มเดียวกัน แต่ user ที่<em>ไม่มีอยู่</em>เป็นอีกกลุ่ม ซึ่งต้องมีเทสของตัวเอง</p>
 
-      <h3>Boundary value analysis — บั๊กชอบอยู่ที่ขอบ</h3>
+      <h3>Boundary value analysis: บั๊กชอบอยู่ที่ขอบ</h3>
       <p>เมื่อมีช่วงหรือเงื่อนไขเปลี่ยน ให้ทดสอบที่ค่าขอบและค่าติดขอบ เช่น 0, 1, 2 หรือ max, max+1</p>
       <p><b>ตัวอย่างจริง:</b> ตัวนับของ TodoMVC เปลี่ยนรูปประโยคระหว่าง <code>1 item left</code> กับ <code>2 items left</code> เทสใน <code>todo.spec.ts</code> จึงตั้งใจครอบทั้งกรณี 1 รายการและหลายรายการ ส่วนกรณี 0 รายการ (footer ต้องหายไป) อยู่ในเทสชุด generated</p>
 
-      <h3>Decision table — เมื่อผลลัพธ์ขึ้นกับหลายเงื่อนไขพร้อมกัน</h3>
+      <h3>Decision table: เมื่อผลลัพธ์ขึ้นกับหลายเงื่อนไขพร้อมกัน</h3>
       <p>เขียนตารางให้ครบทุกคู่ของเงื่อนไข แล้วใส่ผลที่ควรเกิดในแต่ละช่อง ช่องที่เขียนผลไม่ออกคือช่องที่ spec ยังไม่ได้ตัดสินใจ ซึ่งมักเป็นที่ซ่อนของบั๊ก</p>
       <div class="table-wrap"><table>
         <thead><tr><th>role \ หน้าจอ</th><th>รายการจอง</th><th>อนุมัติ</th><th>ตั้งค่าองค์กร</th></tr></thead>
@@ -132,14 +130,13 @@
       </table></div>
       <p>ตารางนี้เป็นรูปแบบที่ใช้ใน <a href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/02-role-silent-failures.md">CS-02</a> ตอนเพิ่ม role ใหม่หนึ่งตัวแล้วพังเงียบ 6 จุด แถวที่มีแต่ "?" คือสิ่งที่ต้องถามทีมก่อนเขียนเทส</p>
 
-      <h3>State transition — ไล่ทุกเส้น โดยเฉพาะเส้นย้อนกลับ</h3>
+      <h3>State transition: ไล่ทุกเส้น โดยเฉพาะเส้นย้อนกลับ</h3>
       <p>วาดสถานะกับเส้นที่เปลี่ยนสถานะได้ แล้วทดสอบทุกเส้น คนส่วนใหญ่ทดสอบแค่เส้นตรงไปข้างหน้า</p>
       <div class="flow"><span>สร้างงาน</span><i>→</i><span>จองที่ในตาราง</span><i>→</i><span>ยกเลิก</span><i>→</i><span>ที่นั่งต้องถูกคืน</span><i>→</i><span>จองใหม่ช่วงเดิมได้</span></div>
       <p><b>ตัวอย่างจริง:</b> <a href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/03-slot-leak.md">CS-03</a> เส้น "สร้าง → ยกเลิก → จองใหม่" ไม่มีใครเคยไล่ ผลคือที่นั่งค้างอยู่ 640 รายการ ส่วนในเทสชุด generated ของ TodoMVC มี "กด toggle-all สองครั้งต้องกลับเป็น active ทั้งหมด" ซึ่งก็เป็นเส้นย้อนกลับเหมือนกัน</p>
     </article>
 
     <article id="flake">
-      <p class="kicker">ความรู้ · 02</p>
       <h2>Flake playbook</h2>
       <p>เทสที่ผ่านบ้างไม่ผ่านบ้างอันตรายกว่าเทสที่แดงตลอด เพราะสอนให้ทีมเลิกเชื่อสีแดง กติกาข้างล่างนี้ใช้ทุก repo</p>
 
@@ -183,18 +180,17 @@ expect(await items.count()).toBe(3)</code></pre></div>
     </article>
 
     <article id="rules-testing">
-      <p class="kicker">ความรู้ · 03</p>
       <h2>ทดสอบ Firestore security rules</h2>
       <p>security rules คือด่านเดียวระหว่างผู้ใช้กับฐานข้อมูล การทดสอบว่า "ทำได้" ยังไม่พอ ต้องพิสูจน์ว่าสิ่งที่<b>ต้องถูกปฏิเสธ</b>ถูกปฏิเสธจริง</p>
 
       <h3>หลักที่ใช้ใน multitenant-booking-qa (76 เคส)</h3>
       <ul>
-        <li><b>รันกับ emulator จริง ไม่ใช้ mock</b> — rules ที่ mock ไว้จะผ่านเสมอ แม้ rules จริงจะผิด</li>
-        <li><b>เทสฝั่งปฏิเสธเยอะกว่าฝั่งอนุญาต</b> — ข้าม tenant, role ไม่พอ, ยังไม่มีสังกัด, ไม่ล็อกอิน</li>
-        <li><b>seed ข้อมูลรุ่นเก่า (legacy shape)</b> — เอกสารที่สร้างก่อนเปลี่ยน schema มักหลุดเงื่อนไขของ rules ใหม่</li>
-        <li><b>ตั้งชื่อเส้นแบ่งให้ถูก</b> — ชุด <code>public-boundary</code> พิสูจน์ว่าเส้นแบ่งสิทธิ์คือ "ยังไม่มีสังกัด" ไม่ใช่ "ยังไม่ล็อกอิน" สองอย่างนี้ฟังเหมือนกันแต่ให้ผลต่างกัน</li>
+        <li><b>รันกับ emulator จริง ไม่ใช้ mock</b>: rules ที่ mock ไว้จะผ่านเสมอ แม้ rules จริงจะผิด</li>
+        <li><b>เทสฝั่งปฏิเสธเยอะกว่าฝั่งอนุญาต</b>: ข้าม tenant, role ไม่พอ, ยังไม่มีสังกัด, ไม่ล็อกอิน</li>
+        <li><b>seed ข้อมูลรุ่นเก่า (legacy shape)</b>: เอกสารที่สร้างก่อนเปลี่ยน schema มักหลุดเงื่อนไขของ rules ใหม่</li>
+        <li><b>ตั้งชื่อเส้นแบ่งให้ถูก</b>: ชุด <code>public-boundary</code> พิสูจน์ว่าเส้นแบ่งสิทธิ์คือ "ยังไม่มีสังกัด" ไม่ใช่ "ยังไม่ล็อกอิน" สองอย่างนี้ฟังเหมือนกันแต่ให้ผลต่างกัน</li>
       </ul>
-      <p>จาก <code>tests/tenant-isolation.test.ts</code> (ย่อ) — ออกแบบเป็น decision table: ผู้กระทำ × เจ้าของเอกสาร × operation</p>
+      <p>จาก <code>tests/tenant-isolation.test.ts</code> (ย่อ): ออกแบบเป็น decision table: ผู้กระทำ × เจ้าของเอกสาร × operation</p>
       <pre><code>beforeEach(async () =&gt; {
   const env = await getTestEnv()
   await env.clearFirestore()
@@ -218,8 +214,7 @@ test('tenant B staff cannot READ a tenant A booking', async () =&gt; {
     </article>
 
     <article id="agents">
-      <p class="kicker">ความรู้ · 04</p>
-      <h2>Playwright Test Agents — ใช้ AI เขียนเทสแบบมีรั้ว</h2>
+      <h2>Playwright Test Agents: ใช้ AI เขียนเทสแบบมีรั้ว</h2>
       <div class="flow"><span>planner</span><i>→</i><span>specs/*.md (แผน = oracle)</span><i>→</i><span>generator</span><i>→</i><span>tests/generated/</span><i>→</i><span>healer</span></div>
       <p>Playwright มี agent สามตัวที่ใช้ร่วมกับ Claude Code ได้ ค่าเริ่มต้นของ healer ถูกสั่งให้ "ทำทุกอย่างที่สมเหตุสมผลให้เทสผ่าน" ซึ่งเหมาะกับ demo แต่อันตรายกับชุด regression เพราะเทสที่แก้ assertion ตัวเองจะเขียวในจังหวะที่ควรจับบั๊กพอดี</p>
 
@@ -234,7 +229,7 @@ test('tenant B staff cannot READ a tenant A booking', async () =&gt; {
       <div class="table-wrap"><table>
         <thead><tr><th>ขั้น</th><th>ผล</th></tr></thead>
         <tbody>
-          <tr><td>planner</td><td>32 scenario (สรุปของมันเองบอก 33) — คนรีวิวตัดเหลือ 31</td></tr>
+          <tr><td>planner</td><td>32 scenario (สรุปของมันเองบอก 33): คนรีวิวตัดเหลือ 31</td></tr>
           <tr><td>generator</td><td>31 เทส แต่รันได้ <b>0 จาก 31</b> ในรอบแรก เพราะ path ของ import ที่เขียนไว้ใน<em>กฎของเราเอง</em>ผิด</td></tr>
           <tr><td>คนแก้</td><td>3 จุด: path ของ import, <code>uncheck()</code> บนแถวที่หาย, ลูป <code>items.all()</code></td></tr>
           <tr><td>healer</td><td>แก้ locator ถูก ไม่แตะค่าที่ผิด แต่<b>ไม่ได้ทำ <code>fixme</code></b> เพราะกฎเขียนไว้สำหรับกรณี "แอปขัดกับแผน" แต่กรณีนั้น "เทสขัดกับแผน"</td></tr>
@@ -246,22 +241,21 @@ test('tenant B staff cannot READ a tenant A booking', async () =&gt; {
 
     <!-- ───────────────────────── Runbook ───────────────────────── -->
 
-    <p class="group-title"><b>Runbook</b> — ส่วนนี้เขียนไว้ให้ตัวเองใช้ตอนต้องแก้ระบบ แต่เปิดให้อ่านได้ ค่าทุกตัวในนี้เป็นค่าสาธารณะอยู่แล้ว (อยู่ใน workflow ของ repo public) และสิทธิ์เขียนถูกล็อกไว้ฝั่ง Google Cloud</p>
+    <p class="group-title"><b>Runbook</b>: ส่วนนี้เขียนไว้ให้ตัวเองใช้ตอนต้องแก้ระบบ แต่เปิดให้อ่านได้ ค่าทุกตัวในนี้เป็นค่าสาธารณะอยู่แล้ว (อยู่ใน workflow ของ repo public) และสิทธิ์เขียนถูกล็อกไว้ฝั่ง Google Cloud</p>
 
     <article id="live-stats">
-      <p class="kicker">Runbook · 01</p>
       <h2>ระบบตัวเลขสดทำงานยังไง</h2>
       <div class="flow"><span>push เข้า main</span><i>→</i><span>CI รันเทส + json report</span><i>→</i><span>GitHub OIDC → WIF</span><i>→</i><span>Firestore <code>suites/*</code></span><i>→</i><span>หน้าเว็บ fetch ตอนเปิด</span></div>
       <div class="table-wrap"><table>
         <thead><tr><th>ส่วน</th><th>ค่า</th></tr></thead>
         <tbody>
           <tr><td>Firebase project</td><td><code>supakorn-portfolio</code> (asia-southeast1, Spark)</td></tr>
-          <tr><td>Collection</td><td><code>suites/{id}</code> — repo, label, total (รันใน CI), inventory (มีใน repo), passed, failed, flaky, skipped, status, commit, runUrl, source (<code>ci</code> / <code>local</code> / <code>manual</code>), updatedAt</td></tr>
-          <tr><td>Rules</td><td><code>suites</code> อ่านได้ทุกคน เขียนไม่ได้ ส่วน collection อื่นปิดหมด — ไฟล์ <code>firestore.rules</code></td></tr>
+          <tr><td>Collection</td><td><code>suites/{id}</code>: repo, label, total (รันใน CI), inventory (มีใน repo), passed, failed, flaky, skipped, status, commit, runUrl, source (<code>ci</code> / <code>local</code> / <code>manual</code>), updatedAt</td></tr>
+          <tr><td>Rules</td><td><code>suites</code> อ่านได้ทุกคน เขียนไม่ได้ ส่วน collection อื่นปิดหมด ไฟล์ <code>firestore.rules</code></td></tr>
           <tr><td>คนเขียน</td><td>service account <code>ci-stats-writer@supakorn-portfolio.iam.gserviceaccount.com</code> (<code>roles/datastore.user</code>)</td></tr>
           <tr><td>WIF provider</td><td><code>projects/932862873750/locations/global/workloadIdentityPools/github/providers/github-oidc</code><br>condition: <code>repository_owner == 'NNEWNERR' &amp;&amp; ref == 'refs/heads/main'</code></td></tr>
-          <tr><td>Script</td><td><code>ci/publish-test-stats.mjs</code> (ตัวหลัก) — แต่ละ repo copy ไปไว้ที่ <code>scripts/</code></td></tr>
-          <tr><td>suite id ปัจจุบัน</td><td><code>qa-automation</code>, <code>mtb-rules</code>, <code>mtb-ui</code>, <code>sauce-demo-tests</code>, <code>krungthon-e2e</code>†, <code>krungthon-rules</code>† († repo private — ส่งด้วย <code>--private</code> ไม่มี commit/ลิงก์ run)</td></tr>
+          <tr><td>Script</td><td><code>ci/publish-test-stats.mjs</code> (ตัวหลัก): แต่ละ repo copy ไปไว้ที่ <code>scripts/</code></td></tr>
+          <tr><td>suite id ปัจจุบัน</td><td><code>qa-automation</code>, <code>mtb-rules</code>, <code>mtb-ui</code>, <code>sauce-demo-tests</code>, <code>krungthon-e2e</code>†, <code>krungthon-rules</code>† († repo private ส่งด้วย <code>--private</code> ไม่มี commit/ลิงก์ run)</td></tr>
         </tbody>
       </table></div>
       <div class="callout"><b>ทำไมไม่ใช้ service account key</b>key เป็น secret ที่อายุยาว รั่วแล้วใช้ได้จากทุกที่ ส่วน WIF ให้ GitHub ออก token อายุสั้นต่อ run และ Google ตรวจว่ามาจาก repo กับ branch ที่อนุญาตจริง ไม่มีอะไรให้รั่ว</div>
@@ -269,10 +263,9 @@ test('tenant B staff cannot READ a tenant A booking', async () =&gt; {
     </article>
 
     <article id="add-repo">
-      <p class="kicker">Runbook · 02</p>
       <h2>เพิ่ม repo ใหม่เข้าระบบ</h2>
       <ol>
-        <li><b>อนุญาตให้ repo ใช้ service account</b> — ทำครั้งเดียวต่อ repo
+        <li><b>อนุญาตให้ repo ใช้ service account</b>: ทำครั้งเดียวต่อ repo
 <pre><code>gcloud iam service-accounts add-iam-policy-binding \
   ci-stats-writer@supakorn-portfolio.iam.gserviceaccount.com \
   --role roles/iam.workloadIdentityUser \
@@ -310,23 +303,22 @@ outputFile: { json: 'vitest-results.json' },</code></pre></li>
           FIRESTORE_TOKEN: ${{ steps.gcp.outputs.access_token }}
         run: node scripts/publish-test-stats.mjs --suite &lt;id&gt; --repo &lt;repo&gt; --label "Playwright" --kind playwright --file results.json</code></pre>
         ถ้า CI กรองเทสบางส่วนออก (เช่น <code>--grep-invert @visual</code>) ให้เพิ่ม step <code>npx playwright test --list --reporter=json</code> (env <code>PLAYWRIGHT_JSON_OUTPUT_NAME: inventory.json</code>) ก่อน publish แล้วต่อท้ายคำสั่งด้วย <code>--inventory inventory.json</code></li>
-        <li><b>ให้หน้าเว็บแสดง</b> — ใส่ <code>&lt;p class="live" data-suites="&lt;id&gt;" hidden&gt;&lt;/p&gt;</code> ใน card ของ repo ใน <code>index.html</code> ส่วนตัวเลขรวมจะนับ suite ใหม่ให้เอง</li>
-        <li><b>ยืนยัน</b> — merge เข้า main แล้วดู log ของ step "Publish" ต้องขึ้น <code>published suites/&lt;id&gt;: …</code></li>
+        <li><b>ให้หน้าเว็บแสดง</b>: ใส่ <code>&lt;p class="live" data-suites="&lt;id&gt;" hidden&gt;&lt;/p&gt;</code> ใน card ของ repo ใน <code>index.html</code> ส่วนตัวเลขรวมจะนับ suite ใหม่ให้เอง</li>
+        <li><b>ยืนยัน</b>: merge เข้า main แล้วดู log ของ step "Publish" ต้องขึ้น <code>published suites/&lt;id&gt;: …</code></li>
       </ol>
     </article>
 
     <article id="troubleshoot">
-      <p class="kicker">Runbook · 03</p>
       <h2>เมื่อมีอะไรพัง</h2>
       <div class="table-wrap"><table>
         <thead><tr><th>อาการ</th><th>สาเหตุที่เป็นไปได้</th><th>ทำอะไร</th></tr></thead>
         <tbody>
-          <tr><td>step Authenticate ถูกข้ามบน PR</td><td>ตั้งใจให้เป็นแบบนั้น — ส่งผลเฉพาะตอน push เข้า main</td><td>ไม่ต้องทำอะไร</td></tr>
+          <tr><td>step Authenticate ถูกข้ามบน PR</td><td>ตั้งใจให้เป็นแบบนั้น ส่งผลเฉพาะตอน push เข้า main</td><td>ไม่ต้องทำอะไร</td></tr>
           <tr><td>Authenticate fail: <code>unauthorized_client</code> / permission denied</td><td>repo ยังไม่มี binding (ข้อ 1 ของ "เพิ่ม repo") หรือ workflow ไม่มี <code>id-token: write</code></td><td>เพิ่ม binding หรือ permission</td></tr>
           <tr><td>Publish: <code>Firestore 403</code></td><td>service account เสีย role <code>datastore.user</code></td><td><code>gcloud projects add-iam-policy-binding supakorn-portfolio --member serviceAccount:ci-stats-writer@… --role roles/datastore.user</code></td></tr>
           <tr><td>Publish: <code>reports 0 tests</code> หรือหาไฟล์ไม่เจอ</td><td>json reporter ไม่ได้เปิด หรือ path ไม่ตรง หรือเทสล้มก่อนเขียน report</td><td>เช็ก reporter config และ <code>--file</code></td></tr>
           <tr><td>เว็บโชว์ตัวเลขเก่า</td><td>run ล่าสุดไม่ได้ส่งผล (ดูสองแถวบน) หรือ browser cache</td><td>ดูข้อมูลดิบด้านล่าง</td></tr>
-          <tr><td>เว็บไม่มีบรรทัด "CI ล่าสุด" เลย</td><td>fetch Firestore ไม่สำเร็จ — หน้าเว็บจะโชว์ตัวเลขที่เขียนไว้ในหน้าแทน</td><td>เปิด console ของ browser ดู error</td></tr>
+          <tr><td>เว็บไม่มีบรรทัด "CI ล่าสุด" เลย</td><td>fetch Firestore ไม่สำเร็จ หน้าเว็บจะโชว์ตัวเลขที่เขียนไว้ในหน้าแทน</td><td>เปิด console ของ browser ดู error</td></tr>
         </tbody>
       </table></div>
       <h3>ดูข้อมูลดิบใน Firestore</h3>
@@ -342,15 +334,14 @@ outputFile: { json: 'vitest-results.json' },</code></pre></li>
     </article>
 
     <article id="update-site">
-      <p class="kicker">Runbook · 04</p>
       <h2>อัปเดตเว็บนี้</h2>
       <ul>
-        <li><b>repo:</b> <a href="https://github.com/NNEWNERR/NNEWNERR.github.io">NNEWNERR/NNEWNERR.github.io</a> — HTML/CSS ล้วน ไม่มี build step</li>
+        <li><b>repo:</b> <a href="https://github.com/NNEWNERR/NNEWNERR.github.io">NNEWNERR/NNEWNERR.github.io</a>: HTML/CSS ล้วน ไม่มี build step</li>
         <li><b>deploy:</b> push เข้า <code>main</code> แล้ว GitHub Pages จะ build เองภายในประมาณ 1 นาที</li>
         <li><b>ไฟล์:</b> <code>index.html</code> (หน้าแรก), <code>docs/index.html</code> (หน้านี้), <code>assets/site.css</code> (สไตล์ที่ใช้ร่วมกัน)</li>
         <li><b>rules ของ Firestore:</b> แก้ <code>firestore.rules</code> แล้วรัน <code>firebase deploy --only firestore:rules</code></li>
       </ul>
-      <h3>เมื่อจำนวนเทสเปลี่ยน — ต้องแก้ให้ตรงกันกี่ที่</h3>
+      <h3>เมื่อจำนวนเทสเปลี่ยน: ต้องแก้ให้ตรงกันกี่ที่</h3>
       <ol>
         <li>ตัวเลขสดบนเว็บอัปเดตเอง ไม่ต้องทำอะไร</li>
         <li>ตัวเลขที่เขียนไว้ใน card ของ <code>index.html</code> ซึ่งใช้ตอน Firestore ล่ม</li>
