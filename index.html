@@ -8,6 +8,7 @@
 <meta property="og:title" content="ศุภากร เศวตวงศ์สกุล — Automation QA Engineer">
 <meta property="og:description" content="358 automated tests · 4 repo · case study บั๊กจริง 8 เคส">
 <meta property="og:type" content="website">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -17,12 +18,12 @@
 
 <nav aria-label="หลัก">
   <div class="wrap">
-    <a class="brand" href="#top">ศุภากร (นิว)</a>
+    <a class="brand" href="#top" aria-label="ศุภากร (นิว)"><span class="brand-full" aria-hidden="true">ศุภากร (นิว)</span><span class="brand-short" aria-hidden="true">นิว</span></a>
     <ul>
       <li><a href="#work">ผลงาน</a></li>
       <li><a href="#cases">Case studies</a></li>
-      <li class="nav-extra"><a href="#approach">แนวคิด</a></li>
-      <li class="nav-extra"><a href="#about">เกี่ยวกับผม</a></li>
+      <li><a href="#approach">แนวคิด</a></li>
+      <li><a href="#about">เกี่ยวกับผม</a></li>
       <li><a href="docs/">Docs</a></li>
       <li><a href="#contact">ติดต่อ</a></li>
     </ul>
@@ -50,8 +51,7 @@
 
   <div class="wrap">
     <p class="proof"><b id="stat-total">358</b><span id="stat-total-label">automated tests</span> ใน 4 repo · 7 CI workflow · 8 case study จากระบบจริง</p>
-    <p class="proof-key">358 คือเทสทั้งหมดที่เขียนไว้ใน repo ส่วนบรรทัดจุดเขียวในแต่ละการ์ดคือผลรอบ CI ล่าสุด ซึ่งน้อยกว่าเพราะเทสบางชุดต้องรันบนเครื่อง Windows หรือยิงกับ production จึงรันแยกนอก CI</p>
-    <p class="stats-note" id="stats-note" hidden><span class="dot" aria-hidden="true"></span><span></span></p>
+    <p class="stats-note manual" id="stats-note"><span class="dot" aria-hidden="true"></span><span>นับเทสทุกตัวใน repo · ตัวเลข ณ 16 ต.ค. 2026</span></p>
 
     <div class="highlights">
       <h2 class="sub">ตัวอย่างบั๊กจริงที่ไล่จนเจอสาเหตุ</h2>
@@ -85,19 +85,19 @@
             <span class="badge private">private · ระบบลูกค้า</span>
           </div>
           <p class="outcome">ดูแลคุณภาพระบบจองคิวที่ลูกค้าใช้งานจริงทุกวัน และมีเทสยิงกับ production ทุกวันเพื่อจับปัญหาภายใน 24 ชั่วโมง</p>
-          <p class="system"><b>ระบบที่ทดสอบ:</b> เว็บจองคิวช่างแอร์ ลูกค้าจองเองผ่านเว็บหรือ QR ของสาขา พนักงานจัดตารางช่าง และแจ้งเตือนผ่าน LINE · <a href="docs/#sys-krungthon">อธิบายระบบ</a></p>
           <p class="count">เทสใน repo: <b>96</b> E2E/API · <b>90</b> Firestore rules</p>
           <p class="live" data-suites="krungthon-e2e,krungthon-rules" data-gap="ส่วนที่เหลือยิงกับ production หรือต้องใช้สิทธิ์ระบบลูกค้าเพิ่ม จึงรันแยกนอก CI" hidden></p>
           <details class="more">
             <summary>รายละเอียดเทคนิค</summary>
+            <p class="system"><b>ระบบที่ทดสอบ:</b> เว็บจองคิวช่างแอร์ ลูกค้าจองเองผ่านเว็บหรือ QR ของสาขา พนักงานจัดตารางช่าง และแจ้งเตือนผ่าน LINE · <a href="docs/#sys-krungthon">อธิบายระบบ</a></p>
             <p>ชุดเทสของแพลตฟอร์มจองคิวบน Firebase ครอบคลุม auth, การจอง, สิทธิ์การเข้าถึง, การจองชนกันแบบ concurrent, การแยกข้อมูลระหว่าง tenant, a11y, mobile responsive และการยิง API ตรงไปที่ Cloud Functions</p>
             <ul>
               <li>96 tests อยู่ใน 36 spec files และ 53 test case อ้างอิง TC-ID จากเอกสาร test case</li>
               <li>CI 4 workflow: matrix 17 ชุดตอน PR, rules 90 เคสบน emulator ทุก push, แจ้งเตือนเข้า Discord</li>
               <li><strong>Daily soak ยิงกับ production ทุกวัน</strong> เพื่อจับ regression ภายใน 24 ชั่วโมง ไม่ต้องรอ PR ถัดไป</li>
             </ul>
+            <p class="note">repo เป็น private เพราะเป็นระบบลูกค้าที่ใช้งานจริง ยินดีเปิดให้ดูและอธิบายโครงสร้างเทส, TC-ID และ soak workflow ตอนสัมภาษณ์ ส่วนวิธีคิดเล่าไว้ใน <a href="#cases">case studies</a></p>
           </details>
-          <p class="note">repo เป็น private เพราะเป็นระบบลูกค้าที่ใช้งานจริง ยินดีเปิดให้ดูและอธิบายโครงสร้างเทส, TC-ID และ soak workflow ตอนสัมภาษณ์ ส่วนวิธีคิดเล่าไว้ใน <a href="#cases">case studies</a></p>
           <div class="tags"><span>Playwright</span><span>TypeScript</span><span>Firebase</span><span>Angular</span><span>GitHub Actions</span></div>
         </article>
 
@@ -107,11 +107,11 @@
             <span class="badge">public</span>
           </div>
           <p class="outcome">พิสูจน์ว่าข้อมูลของแต่ละองค์กรไม่รั่วไปหากัน ทั้งที่ชั้นฐานข้อมูลและที่หน้าจอ และเจอบั๊กจริง 2 ตัวระหว่างเขียนเทส</p>
-          <p class="system"><b>ระบบที่ทดสอบ:</b> แอปจองที่ผมสร้างเอง หลายองค์กรใช้ฐานข้อมูลเดียวกัน มี 4 role · <a href="docs/#sys-multitenant">อธิบายระบบ</a></p>
           <p class="count">เทสใน repo: <b>93</b> (rules 76 · UI 17)</p>
           <p class="live" data-suites="mtb-rules,mtb-ui" hidden></p>
           <details class="more">
             <summary>รายละเอียดเทคนิค</summary>
+            <p class="system"><b>ระบบที่ทดสอบ:</b> แอปจองที่ผมสร้างเอง หลายองค์กรใช้ฐานข้อมูลเดียวกัน มี 4 role · <a href="docs/#sys-multitenant">อธิบายระบบ</a></p>
             <p>76 tests ของ Firestore security rules + 17 Playwright UI tests (desktop + Pixel 7) รันกับ emulator จริงทั้งคู่ ไม่ใช่ mock สั่ง <code>npm ci && npm test</code> ก็จบ ไม่ต้องมี credential</p>
             <ul>
               <li>เป็นเจ้าของทั้ง stack จึง seed ข้อมูลรุ่นเก่า สลับ role และ assert สิ่งที่<strong>ต้องถูกปฏิเสธ</strong>ได้</li>
@@ -129,11 +129,11 @@
             <span class="badge">public</span>
           </div>
           <p class="outcome">ชุดเทสครบทุกชั้น ทั้ง API, หน้าจอ, accessibility และภาพหน้าจอ รันขนานใน CI แล้วรวมเป็นรายงานเดียว พร้อมทดลองให้ AI agent เขียนและซ่อมเทสภายใต้กติกาที่ตั้งไว้</p>
-          <p class="system"><b>ระบบที่ทดสอบ:</b> ระบบ demo สาธารณะ JSONPlaceholder (API) และ TodoMVC (หน้าเว็บ) ใครก็ clone ไปรันได้ · <a href="docs/#sys-qa-automation">อธิบายระบบ</a></p>
           <p class="count">เทสใน repo: <b>63</b> ใน 8 Playwright projects</p>
           <p class="live" data-suites="qa-automation" data-gap="ส่วนที่เหลือเป็น visual test ที่ baseline ผูกกับ Windows จึงรันบนเครื่อง ไม่รันใน CI" hidden></p>
           <details class="more">
             <summary>รายละเอียดเทคนิค</summary>
+            <p class="system"><b>ระบบที่ทดสอบ:</b> ระบบ demo สาธารณะ JSONPlaceholder (API) และ TodoMVC (หน้าเว็บ) ใครก็ clone ไปรันได้ · <a href="docs/#sys-qa-automation">อธิบายระบบ</a></p>
             <p>API contract, UI, accessibility (axe-core), visual regression, smoke และ auth แยกตาม role ด้วย <code>storageState</code> CI รัน 4 shard ขนาน แล้ว merge blob report กลับเป็นรายงาน HTML ฉบับเดียว</p>
             <ul>
               <li>เทสติด tag (<code>@smoke</code> <code>@regression</code> <code>@a11y</code> <code>@visual</code>) เลือกรันทีละชั้นได้</li>
@@ -150,11 +150,11 @@
             <span class="badge">public</span>
           </div>
           <p class="outcome">ทดสอบร้านค้าออนไลน์ตัวอย่างตั้งแต่ login จนจ่ายเงิน พร้อมเอกสารกลยุทธ์การทดสอบที่บอกว่าเลือกเทสอะไรและเพราะอะไร</p>
-          <p class="system"><b>ระบบที่ทดสอบ:</b> Sauce Demo ร้านค้าจำลองที่ทำไว้ให้ฝึกเทส · <a href="docs/#sys-sauce">อธิบายระบบ</a></p>
           <p class="count">เทสใน repo: <b>16</b> · 4 Page Object · เอกสารกลยุทธ์ 1 ฉบับ</p>
           <p class="live" data-suites="sauce-demo-tests" data-gap="ส่วนที่เหลือเป็น visual test ที่ baseline ผูกกับ Windows จึงรันบนเครื่อง ไม่รันใน CI" hidden></p>
           <details class="more">
             <summary>รายละเอียดเทคนิค</summary>
+            <p class="system"><b>ระบบที่ทดสอบ:</b> Sauce Demo ร้านค้าจำลองที่ทำไว้ให้ฝึกเทส · <a href="docs/#sys-sauce">อธิบายระบบ</a></p>
             <p>ครอบคลุม login, การเรียงสินค้า, ตะกร้า และ checkout พร้อม visual + accessibility check บน <code>BasePage</code> ร่วมกัน</p>
             <ul>
               <li><code>TESTING.md</code> คือเอกสารกลยุทธ์การทดสอบที่มีขอบเขต, risk matrix และ test pyramid</li>
@@ -172,42 +172,42 @@
       <h2>Case studies: บั๊กจริงจากระบบที่ใช้งานอยู่</h2>
       <p class="section-lede">โค้ดของระบบลูกค้าเอามาแสดงไม่ได้ แต่<strong>วิธีคิดตอนไล่หาสาเหตุ</strong>เล่าได้ ทุกเคสเรียงตามลำดับเดียวกัน: อาการ → ตามรอย → สาเหตุราก → แก้ → ยืนยัน → บทเรียน</p>
       <div class="cases">
-        <a class="case" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/01-auth-race-condition.md">
+        <a class="case" id="cs-01" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/01-auth-race-condition.md">
           <h3>login ล้มแบบสุ่ม 1 ใน N ครั้ง: race condition ระหว่าง session สองเส้น</h3>
           <p>แยกให้ออกว่า "เทสไม่นิ่ง" หรือ "ระบบไม่นิ่ง" ก่อนใส่ retry</p>
           <span class="id">CS-01</span>
         </a>
-        <a class="case" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/02-role-silent-failures.md">
+        <a class="case" id="cs-02" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/02-role-silent-failures.md">
           <h3>เพิ่ม role ใหม่ 1 ตัว พังเงียบ 6 จุด</h3>
           <p>decision table (role × หน้าจอ), เคส refresh / deep link</p>
           <span class="id">CS-02</span>
         </a>
-        <a class="case" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/03-slot-leak.md">
+        <a class="case" id="cs-03" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/03-slot-leak.md">
           <h3>คิวเต็มทั้งที่งานยกเลิกแล้ว: ที่นั่งค้าง 640 รายการ</h3>
           <p>state-transition testing, remediation แบบ idempotent</p>
           <span class="id">CS-03</span>
         </a>
-        <a class="case" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/04-tenant-isolation.md">
+        <a class="case" id="cs-04" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/04-tenant-isolation.md">
           <h3>กันข้อมูลข้ามองค์กรรั่ว: ทดสอบ 3 ชั้น เจอบั๊กครบ 3 ชั้น</h3>
           <p>negative testing, rules test บน emulator (91 เคส), defense in depth</p>
           <span class="id">CS-04</span>
         </a>
-        <a class="case" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/05-zombie-service-worker.md">
+        <a class="case" id="cs-05" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/05-zombie-service-worker.md">
           <h3>deploy แล้วบางเครื่องเห็นหน้าเก่า: service worker ที่ตายไม่ลง</h3>
           <p>แยกตัวแปรด้วย incognito, ยืนยันที่ HTTP header</p>
           <span class="id">CS-05</span>
         </a>
-        <a class="case" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/06-mobile-only-unclickable-button.md">
+        <a class="case" id="cs-06" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/06-mobile-only-unclickable-button.md">
           <h3>ปุ่มที่ "มองเห็น" แต่ "กดไม่ได้" และเกิดเฉพาะบนมือถือ</h3>
           <p>hit-testing แทน visibility, ทดสอบแยกตามขนาดจอ</p>
           <span class="id">CS-06</span>
         </a>
-        <a class="case" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/07-legacy-escape-hatches.md">
+        <a class="case" id="cs-07" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/07-legacy-escape-hatches.md">
           <h3>สิทธิ์ของระบบรุ่นเก่าที่ลืมปิด: คนไม่ล็อกอินอ่านข้อมูลลูกค้าได้ทั้งหมด</h3>
           <p>security rules review, mutation check (กฎเดิมแดง 15 เคส), blast radius</p>
           <span class="id">CS-07</span>
         </a>
-        <a class="case" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/08-test-blamed-the-system.md">
+        <a class="case" id="cs-08" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/08-test-blamed-the-system.md">
           <h3>เทสฟ้องว่า "จองซ้อนได้" ทั้งที่ระบบถูก: บั๊กของเทส 4 ชั้น</h3>
           <p>ยิง API ตรงแยกระบบออกจากเทส, event-driven assertion, test-data isolation</p>
           <span class="id">CS-08</span>
@@ -238,11 +238,11 @@
       <div class="threads">
         <h3>เส้นที่ร้อยทุก case study</h3>
         <ul>
-          <li>บั๊กที่ "เจอบ้างไม่เจอบ้าง" คือบั๊กที่ต้องสืบ ไม่ใช่บั๊กที่ต้องกลบ <small>CS-01</small></li>
-          <li>เส้นทางย้อนกลับ (ยกเลิก / ปฏิเสธ / refresh) คือที่ที่บั๊กชอบอยู่ <small>CS-02 · CS-03</small></li>
-          <li>ยืนยันด้วยสิ่งที่วัดได้ ไม่ใช่ด้วยสายตา: header, ตัวที่รับคลิกจริง, ผลลัพธ์ที่ต้องถูกปฏิเสธ <small>CS-04 · CS-05 · CS-06</small></li>
-          <li>"ผ่าน" ของเครื่องมือ ไม่เท่ากับ "ใช้งานได้" ของผู้ใช้ <small>CS-06</small></li>
-          <li>เทสที่ฟ้องบั๊กร้ายแรง ต้องพิสูจน์ที่ระบบก่อน <small>CS-08</small></li>
+          <li>บั๊กที่ "เจอบ้างไม่เจอบ้าง" คือบั๊กที่ต้องสืบ ไม่ใช่บั๊กที่ต้องกลบ <small><a href="#cs-01">CS-01</a></small></li>
+          <li>เส้นทางย้อนกลับ (ยกเลิก / ปฏิเสธ / refresh) คือที่ที่บั๊กชอบอยู่ <small><a href="#cs-02">CS-02</a> · <a href="#cs-03">CS-03</a></small></li>
+          <li>ยืนยันด้วยสิ่งที่วัดได้ ไม่ใช่ด้วยสายตา: header, ตัวที่รับคลิกจริง, ผลลัพธ์ที่ต้องถูกปฏิเสธ <small><a href="#cs-04">CS-04</a> · <a href="#cs-05">CS-05</a> · <a href="#cs-06">CS-06</a></small></li>
+          <li>"ผ่าน" ของเครื่องมือ ไม่เท่ากับ "ใช้งานได้" ของผู้ใช้ <small><a href="#cs-06">CS-06</a></small></li>
+          <li>เทสที่ฟ้องบั๊กร้ายแรง ต้องพิสูจน์ที่ระบบก่อน <small><a href="#cs-08">CS-08</a></small></li>
         </ul>
       </div>
     </div>
@@ -260,14 +260,16 @@
           </ul>
           <h3 class="spaced">เทคนิคออกแบบเทส</h3>
           <p class="stack-label">ใช้ในงานจริงแล้ว</p>
-          <p class="plain">decision table (CS-02), state transition (CS-03), negative testing (CS-04)</p>
+          <p class="plain">decision table (<a href="#cs-02">CS-02</a>), state transition (<a href="#cs-03">CS-03</a>), negative testing (<a href="#cs-04">CS-04</a>)</p>
           <p class="stack-label">กำลังลงลึก</p>
           <p class="plain">equivalence partitioning, boundary value analysis, risk-based testing, การเขียนรายงานบั๊ก และ exploratory testing</p>
         </div>
         <div>
           <h3>Tech stack</h3>
-          <p class="stack-label">Testing & Automation</p>
-          <div class="stack"><span>Playwright</span><span>TypeScript</span><span>Cypress</span><span>Selenium</span><span>Postman / Newman</span><span>axe-core</span><span>Vitest</span><span>GitHub Actions</span></div>
+          <p class="stack-label">Testing: มีผลงานให้ดูในเว็บนี้</p>
+          <div class="stack"><span>Playwright</span><span>TypeScript</span><span>axe-core</span><span>Vitest</span><span>Firebase Emulator</span><span>GitHub Actions</span></div>
+          <p class="stack-label">Testing: เคยใช้ในงานอื่น</p>
+          <div class="stack"><span>Cypress</span><span>Selenium</span><span>Postman / Newman</span></div>
           <p class="stack-label">Development</p>
           <div class="stack"><span>Angular</span><span>Ionic</span><span>JavaScript</span><span>Tailwind CSS</span><span>Firebase</span><span>Git</span></div>
         </div>
@@ -289,13 +291,13 @@
 </main>
 
 <footer>
-  <div class="wrap">© 2026 ศุภากร เศวตวงศ์สกุล · สร้างด้วย HTML/CSS ล้วน ไม่มี build step</div>
+  <div class="wrap">© 2026 ศุภากร เศวตวงศ์สกุล · สร้างด้วย HTML/CSS และ JavaScript เล็กน้อยสำหรับตัวเลขสด ไม่มี build step</div>
 </footer>
 
 <script>
   // Live test stats: CI in each repo writes its latest run on main to
   // Firestore (supakorn-portfolio / suites). Read-only via the REST API; if it
-  // fails, the static numbers above stay as they are.
+  // fails, the static numbers above stay as they are, dated in #stats-note.
   (async () => {
     const API = 'https://firestore.googleapis.com/v1/projects/supakorn-portfolio/databases/(default)/documents/suites?pageSize=50&key=AIzaSyALoHZhZ_BigofqWyTI29wDvGIc4Kcf9Wk'
     let docs
@@ -332,8 +334,9 @@
       el.classList.toggle('manual', manual)
       el.classList.toggle('failed', failed)
       let html = '<span class="dot" aria-hidden="true"></span>'
+      const when = `<span class="when" title="${esc(new Date(latest).toLocaleString('th-TH'))}">${ago(latest)}</span>`
       if (manual) {
-        html += `<span>repo private: ตัวเลขบันทึกมือ ${ago(latest)}</span>`
+        html += `<span>repo private: ตัวเลขบันทึกมือ ${when}</span>`
       } else {
         const sum = (k) => rows.reduce((n, r) => n + (r[k] ?? 0), 0)
         const parts = [`<b>${fmt.format(sum('passed'))} passed</b>`]
@@ -341,14 +344,16 @@
         if (sum('flaky')) parts.push(`${fmt.format(sum('flaky'))} flaky`)
         if (sum('skipped')) parts.push(`${fmt.format(sum('skipped'))} skipped`)
         const where = rows.every((r) => r.source === 'ci') ? 'CI ล่าสุด' : 'รันล่าสุด'
-        html += `<span>${where}: ${parts.join(' · ')} · ${ago(latest)}</span>`
         const run = rows.find((r) => r.runUrl)
-        if (run) html += `<a href="${esc(run.runUrl)}">ดู run →</a>`
-        // Explain why the CI run is smaller than the repo count, so the gap
-        // doesn't read as missing or failing tests.
+        const link = run ? ` · <a href="${esc(run.runUrl)}">ดู run →</a>` : ''
+        html += `<span>${where}: ${parts.join(' · ')} · ${when}${link}</span>`
+        // Why the CI run is smaller than the repo count lives in the card's
+        // details, so the headline line stays one number.
         const inv = sum('inventory'), ran = sum('total')
-        if (el.dataset.gap && inv > ran) {
-          html += `<span class="gap">CI รอบนี้รัน ${fmt.format(ran)} จาก ${fmt.format(inv)} ตัวใน repo · ${esc(el.dataset.gap)}</span>`
+        const more = el.closest('.card')?.querySelector('details.more')
+        if (more && el.dataset.gap && inv > ran) {
+          more.querySelector('summary').insertAdjacentHTML('afterend',
+            `<p class="system">CI รอบล่าสุดรัน ${fmt.format(ran)} จาก ${fmt.format(inv)} ตัวใน repo · ${esc(el.dataset.gap)}</p>`)
         }
       }
       el.innerHTML = html
@@ -360,10 +365,10 @@
     // falls back to tests run for suites that don't report it.
     const total = all.reduce((n, r) => n + (r.inventory ?? r.total ?? 0), 0)
     document.getElementById('stat-total').textContent = fmt.format(total)
-        const note = document.getElementById('stats-note')
+    const note = document.getElementById('stats-note')
     const newest = all.map((r) => r.updatedAt).filter(Boolean).sort().pop()
-    note.lastElementChild.textContent = `ดึงจาก Firestore: CI ของแต่ละ repo อัปเดตทุกครั้งที่ push เข้า main · ล่าสุด ${ago(newest)}`
-    note.hidden = false
+    note.lastElementChild.innerHTML = `นับเทสทุกตัวใน repo · จุดเขียวในการ์ดคือผล CI รอบล่าสุด · อัปเดต <span class="when">${ago(newest)}</span>`
+    note.classList.remove('manual')
   })()
 </script>
 </body>
