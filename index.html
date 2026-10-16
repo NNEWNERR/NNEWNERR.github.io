@@ -85,6 +85,7 @@
             <span class="badge private">private · ระบบลูกค้า</span>
           </div>
           <p class="outcome">ดูแลคุณภาพระบบจองคิวที่ลูกค้าใช้งานจริงทุกวัน และมีเทสยิงกับ production ทุกวันเพื่อจับปัญหาภายใน 24 ชั่วโมง</p>
+          <p class="system"><b>ระบบที่ทดสอบ:</b> เว็บจองคิวช่างแอร์ ลูกค้าจองเองผ่านเว็บหรือ QR ของสาขา พนักงานจัดตารางช่าง และแจ้งเตือนผ่าน LINE · <a href="docs/#sys-krungthon">อธิบายระบบ</a></p>
           <p class="count">เทสใน repo: <b>96</b> E2E/API · <b>90</b> Firestore rules</p>
           <p class="live" data-suites="krungthon-e2e,krungthon-rules" data-gap="ส่วนที่เหลือยิงกับ production หรือต้องใช้สิทธิ์ระบบลูกค้าเพิ่ม จึงรันแยกนอก CI" hidden></p>
           <details class="more">
@@ -106,6 +107,7 @@
             <span class="badge">public</span>
           </div>
           <p class="outcome">พิสูจน์ว่าข้อมูลของแต่ละองค์กรไม่รั่วไปหากัน ทั้งที่ชั้นฐานข้อมูลและที่หน้าจอ และเจอบั๊กจริง 2 ตัวระหว่างเขียนเทส</p>
+          <p class="system"><b>ระบบที่ทดสอบ:</b> แอปจองที่ผมสร้างเอง หลายองค์กรใช้ฐานข้อมูลเดียวกัน มี 4 role · <a href="docs/#sys-multitenant">อธิบายระบบ</a></p>
           <p class="count">เทสใน repo: <b>93</b> (rules 76 · UI 17)</p>
           <p class="live" data-suites="mtb-rules,mtb-ui" hidden></p>
           <details class="more">
@@ -127,6 +129,7 @@
             <span class="badge">public</span>
           </div>
           <p class="outcome">ชุดเทสครบทุกชั้น ทั้ง API, หน้าจอ, accessibility และภาพหน้าจอ รันขนานใน CI แล้วรวมเป็นรายงานเดียว พร้อมทดลองให้ AI agent เขียนและซ่อมเทสภายใต้กติกาที่ตั้งไว้</p>
+          <p class="system"><b>ระบบที่ทดสอบ:</b> ระบบ demo สาธารณะ JSONPlaceholder (API) และ TodoMVC (หน้าเว็บ) ใครก็ clone ไปรันได้ · <a href="docs/#sys-qa-automation">อธิบายระบบ</a></p>
           <p class="count">เทสใน repo: <b>63</b> ใน 8 Playwright projects</p>
           <p class="live" data-suites="qa-automation" data-gap="ส่วนที่เหลือเป็น visual test ที่ baseline ผูกกับ Windows จึงรันบนเครื่อง ไม่รันใน CI" hidden></p>
           <details class="more">
@@ -147,6 +150,7 @@
             <span class="badge">public</span>
           </div>
           <p class="outcome">ทดสอบร้านค้าออนไลน์ตัวอย่างตั้งแต่ login จนจ่ายเงิน พร้อมเอกสารกลยุทธ์การทดสอบที่บอกว่าเลือกเทสอะไรและเพราะอะไร</p>
+          <p class="system"><b>ระบบที่ทดสอบ:</b> Sauce Demo ร้านค้าจำลองที่ทำไว้ให้ฝึกเทส · <a href="docs/#sys-sauce">อธิบายระบบ</a></p>
           <p class="count">เทสใน repo: <b>16</b> · 4 Page Object · เอกสารกลยุทธ์ 1 ฉบับ</p>
           <p class="live" data-suites="sauce-demo-tests" data-gap="ส่วนที่เหลือเป็น visual test ที่ baseline ผูกกับ Windows จึงรันบนเครื่อง ไม่รันใน CI" hidden></p>
           <details class="more">

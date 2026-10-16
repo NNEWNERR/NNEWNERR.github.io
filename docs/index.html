@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Docs — ศุภากร เศวตวงศ์สกุล</title>
-<meta name="description" content="ความรู้ด้าน test automation จากงานจริง: เทคนิคออกแบบเทส, flake playbook, การทดสอบ security rules, Playwright Test Agents และ runbook ของเว็บนี้">
+<meta name="description" content="สาย Automation QA ทำอะไร, ระบบที่ผมทดสอบ และความรู้ด้าน test automation จากงานจริง: เทคนิคออกแบบเทส, flake playbook, การทดสอบ security rules, Playwright Test Agents และ runbook ของเว็บนี้">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -33,6 +33,9 @@
 
   article { padding: 48px 0 8px; border-top: 1px solid var(--line); margin-top: 40px; scroll-margin-top: 70px; }
   article h2 { margin-bottom: 14px; }
+  article h3[id] { scroll-margin-top: 76px; }
+  .spec td:first-child { width: 8.5em; white-space: nowrap; }
+  @media (max-width: 640px) { .spec td { display: block; width: auto; } .spec td:first-child { padding-bottom: 0; border-bottom: 0; color: var(--muted); font-size: 14px; } }
   article h3 { font-size: 19px; margin: 30px 0 8px; line-height: 1.5; }
   article p, article li { max-width: 720px; }
   article ul, article ol { padding-left: 1.3em; }
@@ -80,6 +83,11 @@
 
 <div class="wrap docs">
   <aside class="toc" aria-label="สารบัญ">
+    <p>เริ่มต้น</p>
+    <ol>
+      <li><a href="#career">สาย Automation QA</a></li>
+      <li><a href="#systems">ระบบที่ผมทดสอบ</a></li>
+    </ol>
     <p>ความรู้</p>
     <ol>
       <li><a href="#test-design">เทคนิคออกแบบเทส</a></li>
@@ -99,9 +107,104 @@
   <main class="content">
     <header class="intro">
       <h1>Docs</h1>
-      <p>บันทึกความรู้จากงานจริง ทุกตัวอย่างมาจาก repo ของผมเองหรือ case study ที่เกิดขึ้นจริง ไม่ใช่ตัวอย่างสมมติ ครึ่งแรกเขียนให้คนที่สนใจ test automation อ่าน ครึ่งหลังเป็น runbook ของเว็บนี้ ซึ่งเปิดไว้ให้ดูด้วยเพราะมันคือตัวอย่างการทำ CI → ฐานข้อมูลแบบไม่ใช้ key</p>
+      <p>บันทึกความรู้จากงานจริง ทุกตัวอย่างมาจาก repo ของผมเองหรือ case study ที่เกิดขึ้นจริง ไม่ใช่ตัวอย่างสมมติ ส่วนแรกเล่าว่าสาย Automation QA ทำอะไรและระบบที่ผมทดสอบคืออะไร ส่วนกลางเขียนให้คนที่สนใจ test automation อ่าน ส่วนท้ายเป็น runbook ของเว็บนี้ ซึ่งเปิดไว้ให้ดูด้วยเพราะมันคือตัวอย่างการทำ CI → ฐานข้อมูลแบบไม่ใช้ key</p>
       <div class="audience"><span>คนที่อยากเรียน QA / automation</span><span>recruiter ที่อยากเห็นวิธีคิด</span><span>ตัวผมเองตอนต้องแก้ระบบ</span></div>
     </header>
+
+    <!-- ───────────────────────── Start here ───────────────────────── -->
+
+    <article id="career">
+      <h2>สาย Automation QA ทำอะไร และต้องมีอะไร</h2>
+      <p>งาน QA ไม่ใช่การหาบั๊กให้ได้เยอะที่สุด แต่เป็นการให้ข้อมูลที่ทีมเชื่อได้ ว่าของที่จะปล่อยออกไปมีความเสี่ยงตรงไหน และเสี่ยงแค่ไหน บั๊กที่เจอเป็นผลพลอยได้ ส่วนสิ่งที่ทีมต้องการจริงคือ "กล้าปล่อย" หรือ "ยังไม่ควรปล่อย" พร้อมเหตุผล</p>
+
+      <h3>Manual QA, Automation QA และ SDET ต่างกันยังไง</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>บทบาท</th><th>งานหลัก</th><th>สิ่งที่ส่งมอบ</th></tr></thead>
+        <tbody>
+          <tr><td><b>Manual QA</b></td><td>ออกแบบ test case แล้วทดสอบด้วยมือ สำรวจระบบหาจุดที่ spec ไม่ได้พูดถึง</td><td>test case, รายงานบั๊ก, ผลทดสอบก่อนปล่อย</td></tr>
+          <tr><td><b>Automation QA</b></td><td>เปลี่ยน test case ที่ต้องรันซ้ำให้เป็นโค้ด แล้วต่อเข้า CI ให้รันเองทุกครั้งที่โค้ดเปลี่ยน</td><td>ชุดเทสที่ทีมดูแลต่อได้ และรายงานที่อ่านแล้วรู้ทันทีว่าพังตรงไหน</td></tr>
+          <tr><td><b>SDET</b></td><td>สร้างเครื่องมือและโครงสร้างให้ทั้งทีมเขียนเทสได้ง่าย เช่น test data, fixture, environment, pipeline</td><td>framework, เครื่องมือ, มาตรฐานการเทสของทีม</td></tr>
+        </tbody>
+      </table></div>
+      <p>สามบทบาทนี้ไม่ได้แยกขาดกัน Automation QA ที่ดียังต้องออกแบบเทสเป็นแบบ manual QA เพราะโค้ดเทสที่ดีมาจากเทสที่ออกแบบดี ถ้าเอาเทสที่ออกแบบไม่ดีมาเขียนเป็นโค้ด ก็ได้แค่เทสไม่ดีที่รันเร็วขึ้น</p>
+
+      <h3>ทักษะที่ใช้จริงทุกวัน</h3>
+      <ul>
+        <li><b>ออกแบบเทส:</b> ตอบได้ว่าทำไมต้องเทสค่านี้ ทำไมไม่ต้องเทสค่านั้น ดู<a href="#test-design">เทคนิคออกแบบเทส</a></li>
+        <li><b>เขียนโค้ด:</b> TypeScript หรือภาษาที่ทีมใช้ ระดับที่เขียน Page Object, fixture และ helper ที่คนอื่นอ่านรู้เรื่อง</li>
+        <li><b>เข้าใจระบบที่เทส:</b> HTTP, การล็อกอินและ session, ฐานข้อมูล, สิทธิ์การเข้าถึง เพราะบั๊กที่แพงที่สุดมักอยู่ใต้หน้าจอ ไม่ใช่บนหน้าจอ</li>
+        <li><b>CI:</b> ให้เทสรันเองทุกครั้งที่โค้ดเปลี่ยน และอ่าน log ได้เมื่อมันพัง</li>
+        <li><b>สื่อสาร:</b> รายงานบั๊กที่ developer เปิดอ่านแล้วทำซ้ำได้ในครั้งเดียว และบอกคนที่ไม่ใช่สายเทคนิคได้ว่าความเสี่ยงคืออะไร</li>
+        <li><b>คิดเชิงความเสี่ยง:</b> เวลามีจำกัดเสมอ ต้องเลือกเทสสิ่งที่ถ้าพังแล้วเสียหายมากที่สุดก่อน</li>
+      </ul>
+
+      <h3>เทสหลายชั้น ไม่ใช่ E2E อย่างเดียว</h3>
+      <div class="flow"><span>unit</span><i>→</i><span>API / rules</span><i>→</i><span>UI (E2E)</span><i>→</i><span>ทดสอบกับ production</span></div>
+      <p>ยิ่งขยับไปทางขวา เทสยิ่งใกล้สิ่งที่ผู้ใช้เจอ แต่ก็ยิ่งช้าและพังง่ายขึ้นด้วย ตัวอย่างจาก repo ของผม: <code>multitenant-booking-qa</code> ใช้ rules test 76 เคสพิสูจน์เรื่องสิทธิ์ ซึ่งรันเร็วและนิ่ง แล้วใช้ UI test แค่ 17 เคสกับสิ่งที่ชั้นล่างมองไม่เห็น เช่นปุ่มที่กดไม่ได้บนมือถือ เลือกชั้นให้ถูกตั้งแต่ต้นสำคัญกว่าจำนวนเทส</p>
+
+      <h3>วัดคุณภาพชุดเทสด้วยอะไร</h3>
+      <ul>
+        <li><b>จับบั๊กได้จริงไหม:</b> ลองย้อนโค้ดกลับเป็นรุ่นที่มีบั๊ก ชุดเทสต้องแดง (ดู mutation check ใน<a href="#rules-testing">หัวข้อ security rules</a>)</li>
+        <li><b>จอแดงหมายถึงบั๊กจริงไหม:</b> ถ้าแดงเพราะเทสไม่นิ่งบ่อยๆ ทีมจะเลิกเชื่อ ดู<a href="#flake">Flake playbook</a></li>
+        <li><b>รู้ผลเร็วแค่ไหน:</b> เทสที่รู้ผลหลัง merge ไปแล้วสามวัน ช่วยได้น้อยกว่าเทสที่ฟ้องตั้งแต่ตอนเปิด PR</li>
+      </ul>
+      <p>จำนวนเทสบอกได้แค่ว่าเขียนไปเยอะ ไม่ได้บอกว่าปลอดภัย</p>
+
+      <h3>ถ้าจะเริ่ม: ลำดับที่ผมเดินมา</h3>
+      <ol>
+        <li>เรียนเทคนิคออกแบบเทสก่อนเครื่องมือ เพราะใช้ได้กับทุกเครื่องมือ</li>
+        <li>เขียน Playwright กับระบบ demo สาธารณะ เช่น <code>sauce-demo-tests</code> ฝึก Page Object, locator และ assertion ให้แน่น</li>
+        <li>ต่อ CI ให้รันเองทุก push แล้วเริ่มเจอปัญหาที่เครื่องตัวเองไม่เคยเจอ เช่นฟอนต์ต่างกันระหว่าง OS ใน visual test</li>
+        <li>สร้างระบบเล็กๆ ของตัวเองแล้วเทสทุกชั้น อย่าง <code>multitenant-booking-qa</code> จะทำเรื่องที่ demo ทำไม่ได้ เช่น seed ข้อมูลและสลับ role</li>
+        <li>ทดสอบระบบจริงที่มีผู้ใช้ ที่นี่จะได้เรียนเรื่องที่ไม่มีในหนังสือ เช่นข้อมูลรุ่นเก่า ความเสี่ยงของการเทสบน production และการไล่บั๊กที่เกิดแค่บางครั้ง (ดู <a href="../#cases">case studies</a>)</li>
+      </ol>
+      <p>ผมเริ่มจากการเป็น frontend developer อยู่ 1 ปี ซึ่งช่วยมากในข้อ 4 และ 5 เพราะอ่านโค้ดของระบบที่เทสได้ แต่ไม่จำเป็นต้องเริ่มจากตรงนั้น สายนี้เติบโตต่อไปเป็น SDET หรือ QA Lead ได้ ซึ่งเป็นทางที่ผมกำลังไป</p>
+    </article>
+
+    <article id="systems">
+      <h2>ระบบที่ผมทดสอบ</h2>
+      <p>เทสจะมีความหมายก็ต่อเมื่อรู้ว่าระบบทำอะไร ใครใช้ และถ้าพังจะเสียอะไร หัวข้อนี้อธิบายระบบเบื้องหลังผลงานทั้ง 4 ชิ้นบน<a href="../#work">หน้าแรก</a> เรียงจากระบบจริงไปจนถึงระบบตัวอย่าง</p>
+
+      <h3 id="sys-krungthon">Krungthon Air: ระบบจองคิวช่างแอร์ที่ใช้งานจริง</h3>
+      <div class="table-wrap"><table class="spec">
+        <tbody>
+          <tr><td><b>ระบบคืออะไร</b></td><td>เว็บจองคิวบริการแอร์ ลูกค้าจองวันและเวลาเองผ่านหน้าเว็บหรือ QR ของแต่ละสาขา พนักงานจัดตารางช่าง แล้วระบบแจ้งเตือนผ่าน LINE และ Discord รองรับหลายร้านในระบบเดียว (multi-tenant)</td></tr>
+          <tr><td><b>ใครใช้</b></td><td>ลูกค้าที่จองโดยไม่ต้องมีบัญชี และฝั่งหลังบ้าน 5 role: พนักงาน, เจ้าหน้าที่ประกัน, แอดมิน, แอดมินของร้าน และแอดมินของแพลตฟอร์ม</td></tr>
+          <tr><td><b>เทคโนโลยี</b></td><td>Angular, Firebase (Firestore, Auth, Cloud Functions), LINE OA</td></tr>
+          <tr><td><b>ถ้าพังจะเสียอะไร</b></td><td>คิวช่างชนกัน, ลูกค้าจองไม่ได้แล้วไปร้านอื่น, ข้อมูลลูกค้า (ชื่อ เบอร์ ที่อยู่) รั่วไปร้านอื่นหรือคนที่ไม่ได้ล็อกอิน</td></tr>
+          <tr><td><b>ทดสอบตรงไหน</b></td><td>E2E/API 96 เทสในเส้นทางจอง ตารางช่าง สิทธิ์ของแต่ละ role และการจองชนกัน, rules 90 เทสสำหรับสิทธิ์ในฐานข้อมูล และ daily soak ที่ยิงกับ production ทุกวัน (จำนวนจาก repo ณ 2026-10-16)</td></tr>
+        </tbody>
+      </table></div>
+      <p>เป็นระบบของลูกค้า โค้ดและข้อมูลจึงเปิดไม่ได้ สิ่งที่เล่าได้คือวิธีคิด ซึ่งอยู่ใน <a href="../#cases">case studies</a> ทั้ง 8 เคส</p>
+
+      <h3 id="sys-multitenant">multitenant-booking-qa: ระบบจองที่ผมสร้างเองเพื่อเทสทุกชั้น</h3>
+      <div class="table-wrap"><table class="spec">
+        <tbody>
+          <tr><td><b>ระบบคืออะไร</b></td><td>แอปจองขนาดเล็ก (Booking Desk) ที่หลายองค์กรใช้ฐานข้อมูลเดียวกัน ทุกเอกสารมีรหัสองค์กรเจ้าของกำกับ ผมสร้างขึ้นใหม่ทั้งหมดจากโจทย์แบบเดียวกับระบบจริง โดยไม่ใช้โค้ดหรือข้อมูลของลูกค้า</td></tr>
+          <tr><td><b>ใครใช้</b></td><td>4 role: admin, staff, customer และ platform_admin</td></tr>
+          <tr><td><b>ทำไมต้องสร้างเอง</b></td><td>เทสกับ demo ของคนอื่นทำได้แค่คลิกตาม แต่ระบบที่เป็นเจ้าของเองทำให้ seed ข้อมูลรุ่นเก่า สลับ role และพิสูจน์สิ่งที่<b>ต้องถูกปฏิเสธ</b>ได้</td></tr>
+          <tr><td><b>ถ้าพังจะเสียอะไร</b></td><td>องค์กรหนึ่งเห็นหรือแก้การจองขององค์กรอื่นได้ ซึ่งการจองมีชื่อ เบอร์ และที่อยู่ลูกค้า</td></tr>
+          <tr><td><b>ทดสอบตรงไหน</b></td><td>rules 76 เทส (แยกองค์กร, สิทธิ์ตาม role, การเปลี่ยนสถานะ, ข้อมูลรุ่นเก่า, ขอบเขตของคนที่ยังไม่มีสังกัด) และ UI 17 เทสบนเดสก์ท็อปกับ Pixel 7</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3 id="sys-qa-automation">qa-automation: ชุดเทสหลายชั้นบนระบบ demo สาธารณะ</h3>
+      <div class="table-wrap"><table class="spec">
+        <tbody>
+          <tr><td><b>ระบบคืออะไร</b></td><td>ระบบ demo สาธารณะ 2 ตัว: <a href="https://jsonplaceholder.typicode.com">JSONPlaceholder</a> (API ปลอมสำหรับฝึก) และ <a href="https://demo.playwright.dev/todomvc">TodoMVC</a> (แอปรายการสิ่งที่ต้องทำ)</td></tr>
+          <tr><td><b>ทำไมเลือก</b></td><td>ใครก็ clone แล้วรันได้ทันทีโดยไม่ต้องมีบัญชี จึงเหมาะกับการโชว์เทคนิคที่หลากหลาย: API contract, UI, accessibility, visual regression และ auth แยก role</td></tr>
+          <tr><td><b>จุดที่ต่างจาก demo ทั่วไป</b></td><td>CI แบ่งรัน 4 shard แล้วรวมเป็นรายงานเดียว และมีการทดลองใช้ AI agent เขียนเทสภายใต้กติกา พร้อมบันทึกผลรอบแรกตามจริง (ดู<a href="#agents">หัวข้อ Test Agents</a>)</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3 id="sys-sauce">sauce-demo-tests: ร้านค้าออนไลน์ตัวอย่าง</h3>
+      <div class="table-wrap"><table class="spec">
+        <tbody>
+          <tr><td><b>ระบบคืออะไร</b></td><td><a href="https://www.saucedemo.com">Sauce Demo</a> ร้านค้าออนไลน์จำลองที่ทำไว้ให้ฝึกเทส มี login, รายการสินค้า, ตะกร้า และ checkout</td></tr>
+          <tr><td><b>ทำไมเลือก</b></td><td>เป็นเส้นทางซื้อของที่ทุกคนเข้าใจ จึงเหมาะกับการโชว์พื้นฐานให้แน่น: Page Object 4 หน้า, เทส accessibility และเอกสารกลยุทธ์การทดสอบ (<code>TESTING.md</code>) ที่บอกว่าเลือกเทสอะไรเพราะอะไร</td></tr>
+        </tbody>
+      </table></div>
+    </article>
 
     <!-- ───────────────────────── Knowledge ───────────────────────── -->
 
