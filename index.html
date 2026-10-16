@@ -311,7 +311,9 @@
     })
 
     const all = Object.values(suites)
-    const total = all.reduce((n, r) => n + (r.total ?? 0), 0)
+    // inventory = tests the repo defines (incl. win32-only visual that CI skips);
+    // falls back to tests run for suites that don't report it.
+    const total = all.reduce((n, r) => n + (r.inventory ?? r.total ?? 0), 0)
     document.getElementById('stat-total').textContent = fmt.format(total)
     document.getElementById('stat-total-label').textContent = 'automated tests · ข้อมูลสด'
     const note = document.getElementById('stats-note')

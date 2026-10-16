@@ -256,7 +256,7 @@ test('tenant B staff cannot READ a tenant A booking', async () =&gt; {
         <thead><tr><th>ส่วน</th><th>ค่า</th></tr></thead>
         <tbody>
           <tr><td>Firebase project</td><td><code>supakorn-portfolio</code> (asia-southeast1, Spark)</td></tr>
-          <tr><td>Collection</td><td><code>suites/{id}</code> — repo, label, total, passed, failed, flaky, skipped, status, commit, runUrl, source (<code>ci</code> / <code>local</code> / <code>manual</code>), updatedAt</td></tr>
+          <tr><td>Collection</td><td><code>suites/{id}</code> — repo, label, total (รันใน CI), inventory (มีใน repo), passed, failed, flaky, skipped, status, commit, runUrl, source (<code>ci</code> / <code>local</code> / <code>manual</code>), updatedAt</td></tr>
           <tr><td>Rules</td><td><code>suites</code> อ่านได้ทุกคน เขียนไม่ได้ ส่วน collection อื่นปิดหมด — ไฟล์ <code>firestore.rules</code></td></tr>
           <tr><td>คนเขียน</td><td>service account <code>ci-stats-writer@supakorn-portfolio.iam.gserviceaccount.com</code> (<code>roles/datastore.user</code>)</td></tr>
           <tr><td>WIF provider</td><td><code>projects/932862873750/locations/global/workloadIdentityPools/github/providers/github-oidc</code><br>condition: <code>repository_owner == 'NNEWNERR' &amp;&amp; ref == 'refs/heads/main'</code></td></tr>
@@ -265,7 +265,7 @@ test('tenant B staff cannot READ a tenant A booking', async () =&gt; {
         </tbody>
       </table></div>
       <div class="callout"><b>ทำไมไม่ใช้ service account key</b>key เป็น secret ที่อายุยาว รั่วแล้วใช้ได้จากทุกที่ ส่วน WIF ให้ GitHub ออก token อายุสั้นต่อ run และ Google ตรวจว่ามาจาก repo กับ branch ที่อนุญาตจริง ไม่มีอะไรให้รั่ว</div>
-      <p>ตัวเลขรวมบนหน้าแรกนับเฉพาะเทสที่<b>รันใน CI</b> visual tests ที่ผูกกับ Windows ไม่ได้รันใน CI จึงไม่ถูกนับ</p>
+      <p><b>ตัวเลขสองแบบ:</b> ตัวเลขรวมบนหน้าแรกคือเทสทั้งหมดที่<b>มีใน repo</b> (<code>inventory</code> ได้จาก <code>playwright test --list</code>) ให้ตรงกับเรซูเม่ ส่วนบรรทัด "CI ล่าสุด" ในแต่ละ card คือสิ่งที่<b>รันจริง</b> ซึ่งไม่รวม visual tests ที่ผูกกับ Windows</p>
     </article>
 
     <article id="add-repo">
@@ -308,7 +308,8 @@ outputFile: { json: 'vitest-results.json' },</code></pre></li>
         continue-on-error: true
         env:
           FIRESTORE_TOKEN: ${{ steps.gcp.outputs.access_token }}
-        run: node scripts/publish-test-stats.mjs --suite &lt;id&gt; --repo &lt;repo&gt; --label "Playwright" --kind playwright --file results.json</code></pre></li>
+        run: node scripts/publish-test-stats.mjs --suite &lt;id&gt; --repo &lt;repo&gt; --label "Playwright" --kind playwright --file results.json</code></pre>
+        ถ้า CI กรองเทสบางส่วนออก (เช่น <code>--grep-invert @visual</code>) ให้เพิ่ม step <code>npx playwright test --list --reporter=json</code> (env <code>PLAYWRIGHT_JSON_OUTPUT_NAME: inventory.json</code>) ก่อน publish แล้วต่อท้ายคำสั่งด้วย <code>--inventory inventory.json</code></li>
         <li><b>ให้หน้าเว็บแสดง</b> — ใส่ <code>&lt;p class="live" data-suites="&lt;id&gt;" hidden&gt;&lt;/p&gt;</code> ใน card ของ repo ใน <code>index.html</code> ส่วนตัวเลขรวมจะนับ suite ใหม่ให้เอง</li>
         <li><b>ยืนยัน</b> — merge เข้า main แล้วดู log ของ step "Publish" ต้องขึ้น <code>published suites/&lt;id&gt;: …</code></li>
       </ol>
