@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ศุภากร เศวตวงศ์สกุล — Automation QA Engineer</title>
+<meta name="description" content="พอร์ตโฟลิโอ Automation QA Engineer — Playwright + TypeScript, E2E, API, Firestore rules, CI และ case study บั๊กจริงจากระบบที่ใช้งานอยู่">
+<meta property="og:title" content="ศุภากร เศวตวงศ์สกุล — Automation QA Engineer">
+<meta property="og:description" content="327 automated tests · 4 repo · case study บั๊กจริง 8 เคส">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f7f4;
+    --surface: #ffffff;
+    --text: #1b1d1c;
+    --muted: #5b625f;
+    --line: #e2e4df;
+    --accent: #1f7a4d;
+    --accent-soft: #e3f1e9;
+    --warn: #9a5b00;
+    --radius: 14px;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121413;
+      --surface: #1a1d1b;
+      --text: #e8ebe9;
+      --muted: #9aa39f;
+      --line: #2a2f2c;
+      --accent: #4fc386;
+      --accent-soft: #183326;
+      --warn: #e0a64b;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 400 17px/1.75 "IBM Plex Sans Thai", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+  code { font-family: var(--mono); font-size: .88em; background: var(--accent-soft); padding: .1em .35em; border-radius: 5px; }
+
+  /* nav */
+  nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 58px; gap: 16px; }
+  nav .brand { font-weight: 700; text-decoration: none; color: var(--text); white-space: nowrap; }
+  nav ul { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; overflow-x: auto; }
+  nav ul a { color: var(--muted); text-decoration: none; font-size: 15px; white-space: nowrap; }
+  nav ul a:hover { color: var(--text); }
+  @media (max-width: 640px) { nav ul { display: none; } }
+
+  /* hero */
+  header.hero { padding: 88px 0 56px; }
+  .eyebrow { font-family: var(--mono); font-size: 14px; color: var(--accent); letter-spacing: .02em; margin: 0 0 14px; }
+  h1 { font-size: clamp(34px, 6vw, 56px); line-height: 1.2; margin: 0 0 18px; letter-spacing: -.01em; }
+  .lede { font-size: clamp(18px, 2.2vw, 21px); color: var(--muted); max-width: 720px; margin: 0 0 28px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px 22px; color: var(--muted); font-size: 15px; margin-bottom: 30px; padding: 0; list-style: none; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 20px; border-radius: 999px; font-weight: 600; font-size: 15px; text-decoration: none; border: 1px solid var(--line); color: var(--text); background: var(--surface); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  @media (prefers-color-scheme: dark) { .btn.primary { color: #0d1f15; } }
+
+  /* stats */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; margin-bottom: 24px; }
+  .stat { background: var(--surface); padding: 22px 20px; }
+  .stat b { display: block; font-size: 34px; line-height: 1.1; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .stat span { color: var(--muted); font-size: 14px; }
+  @media (max-width: 720px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+
+  /* sections */
+  section { padding: 64px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: clamp(26px, 3.4vw, 34px); line-height: 1.3; margin: 0 0 10px; }
+  .section-lede { color: var(--muted); max-width: 680px; margin: 0 0 34px; }
+
+  /* projects */
+  .projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  @media (max-width: 800px) { .projects { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; display: flex; flex-direction: column; }
+  .card.feature, .card:last-child:nth-child(even) { grid-column: 1 / -1; }
+  .card-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+  .card h3 { font-size: 21px; margin: 0; line-height: 1.4; }
+  .badge { font-family: var(--mono); font-size: 12.5px; padding: 3px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); white-space: nowrap; }
+  .badge.private { background: color-mix(in srgb, var(--warn) 14%, transparent); color: var(--warn); }
+  .count { font-size: 15px; color: var(--muted); margin: 4px 0 14px; }
+  .count b { color: var(--text); font-variant-numeric: tabular-nums; }
+  .card p { margin: 0 0 12px; }
+  .card ul { margin: 0 0 14px; padding-left: 1.2em; }
+  .card li { margin-bottom: 4px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 12px; }
+  .tags span { font-family: var(--mono); font-size: 12.5px; color: var(--muted); border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; }
+  .card .link { font-weight: 600; font-size: 15px; margin-top: 14px; }
+  .note { font-size: 14.5px; color: var(--muted); border-left: 3px solid var(--line); padding-left: 12px; }
+
+  /* case studies */
+  .cases { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  @media (max-width: 800px) { .cases { grid-template-columns: 1fr; } }
+  .case { display: block; text-decoration: none; color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; transition: border-color .15s, transform .15s; }
+  .case:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .case .id { font-family: var(--mono); font-size: 13px; color: var(--accent); }
+  .case h3 { font-size: 17.5px; line-height: 1.5; margin: 4px 0 8px; font-weight: 600; }
+  .case p { margin: 0; font-size: 14.5px; color: var(--muted); }
+  @media (prefers-reduced-motion: reduce) { .case { transition: none; } .case:hover { transform: none; } html { scroll-behavior: auto; } }
+
+  /* principles */
+  .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; counter-reset: p; }
+  @media (max-width: 800px) { .principles { grid-template-columns: 1fr; } }
+  .principle { border-top: 2px solid var(--accent); padding-top: 16px; }
+  .principle h3 { font-size: 18px; line-height: 1.5; margin: 0 0 8px; }
+  .principle p { margin: 0; color: var(--muted); font-size: 15.5px; }
+  .threads { margin-top: 40px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 26px; }
+  .threads h3 { margin: 0 0 10px; font-size: 18px; }
+  .threads ul { margin: 0; padding-left: 1.2em; }
+  .threads li { margin-bottom: 6px; }
+  .threads li small { font-family: var(--mono); color: var(--muted); font-size: 12.5px; }
+
+  /* about */
+  .about { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  @media (max-width: 800px) { .about { grid-template-columns: 1fr; gap: 28px; } }
+  .about h3 { font-size: 18px; margin: 0 0 14px; }
+  .timeline { list-style: none; margin: 0; padding: 0; }
+  .timeline li { padding: 0 0 18px 18px; border-left: 2px solid var(--line); position: relative; }
+  .timeline li::before { content: ""; position: absolute; left: -6px; top: 9px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+  .timeline b { display: block; }
+  .timeline span { color: var(--muted); font-size: 15px; }
+  .stack { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+  .stack span { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 4px 12px; font-size: 15px; }
+  .stack-label { font-size: 14px; color: var(--muted); margin: 0 0 8px; }
+
+  /* contact */
+  .contact { text-align: center; padding: 80px 0 96px; }
+  .contact .actions { justify-content: center; }
+  footer { border-top: 1px solid var(--line); padding: 22px 0; color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+
+<nav aria-label="หลัก">
+  <div class="wrap">
+    <a class="brand" href="#top">ศุภากร (นิว)</a>
+    <ul>
+      <li><a href="#work">ผลงาน</a></li>
+      <li><a href="#cases">Case studies</a></li>
+      <li><a href="#approach">แนวคิด</a></li>
+      <li><a href="#about">เกี่ยวกับผม</a></li>
+      <li><a href="#contact">ติดต่อ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="top">
+  <header class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Automation QA Engineer · Playwright + TypeScript</p>
+      <h1>ศุภากร เศวตวงศ์สกุล</h1>
+      <p class="lede">ผมเขียน end-to-end test automation ที่ทีมดูแลต่อได้จริง และให้ความสำคัญกับ<strong>การออกแบบเทส</strong>พอๆ กับโค้ดเทส ก่อนย้ายมาสาย QA ผมเป็น frontend developer อยู่ 1 ปี ซึ่งเป็นช่วงที่ได้เห็นกับตาว่าแอปพังด้วยสาเหตุอะไรบ้าง</p>
+      <ul class="meta">
+        <li>📍 สมุทรสงคราม</li>
+        <li>🎓 วศ.บ. เทคโนโลยีวิศวกรรมอิเล็กทรอนิกส์ — มจพ.</li>
+        <li>🎯 เป้าหมายถัดไป: SDET / QA Lead</li>
+      </ul>
+      <div class="actions">
+        <a class="btn primary" href="#work">ดูผลงาน</a>
+        <a class="btn" href="https://github.com/NNEWNERR">GitHub</a>
+        <a class="btn" href="mailto:newnertg@gmail.com">newnertg@gmail.com</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="stats" role="list" aria-label="ภาพรวมผลงาน">
+      <div class="stat" role="listitem"><b>327</b><span>automated tests</span></div>
+      <div class="stat" role="listitem"><b>4</b><span>repo พร้อม CI</span></div>
+      <div class="stat" role="listitem"><b>7</b><span>CI workflow</span></div>
+      <div class="stat" role="listitem"><b>8</b><span>case study บั๊กจริง</span></div>
+    </div>
+  </div>
+
+  <section id="work">
+    <div class="wrap">
+      <h2>ผลงานด้าน QA</h2>
+      <p class="section-lede">ทุก repo รันได้ด้วยคำสั่งเดียว เทสแต่ละตัวเขียนจากเทคนิคที่ระบุชื่อได้ ไม่ใช่การไล่คลิกไปเรื่อยๆ แล้วบันทึกไว้</p>
+
+      <div class="projects">
+        <article class="card feature">
+          <div class="card-top">
+            <h3>Krungthon Air — QA suite</h3>
+            <span class="badge private">private · ระบบลูกค้า</span>
+          </div>
+          <p class="count"><b>96</b> E2E/API tests ใน 36 spec files · <b>90</b> Firestore rules tests · <b>53</b> test case อ้างอิง TC-ID</p>
+          <p>ชุดเทสของแพลตฟอร์มจองคิวบน Firebase ที่ใช้งานจริง ครอบคลุม auth, การจอง, สิทธิ์การเข้าถึง, การจองชนกันแบบ concurrent, การแยกข้อมูลระหว่าง tenant, a11y, mobile responsive และการยิง API ตรงไปที่ Cloud Functions</p>
+          <ul>
+            <li>CI 4 workflow — matrix 17 ชุดตอน PR, rules 90 เคสบน emulator ทุก push, แจ้งเตือนเข้า Discord</li>
+            <li><strong>Daily soak ยิงกับ production ทุกวัน</strong> เพื่อจับ regression ภายใน 24 ชั่วโมง ไม่ต้องรอ PR ถัดไป</li>
+          </ul>
+          <p class="note">repo เป็น private เพราะเป็นระบบลูกค้าที่ใช้งานจริง ยินดีเปิดให้ดูและอธิบายโครงสร้างเทส, TC-ID และ soak workflow ตอนสัมภาษณ์ — วิธีคิดเล่าไว้ใน <a href="#cases">case studies</a></p>
+          <div class="tags"><span>Playwright</span><span>TypeScript</span><span>Firebase</span><span>Angular</span><span>GitHub Actions</span></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <h3>multitenant-booking-qa</h3>
+            <span class="badge">public</span>
+          </div>
+          <p class="count"><b>93</b> tests สองชั้นของระบบเดียวกัน</p>
+          <p>76 tests ของ Firestore security rules + 17 Playwright UI tests (desktop + Pixel 7) รันกับ emulator จริงทั้งคู่ ไม่ใช่ mock — <code>npm ci && npm test</code> จบ ไม่ต้องมี credential</p>
+          <ul>
+            <li>เป็นเจ้าของทั้ง stack จึง seed ข้อมูลรุ่นเก่า สลับ role และ assert สิ่งที่<strong>ต้องถูกปฏิเสธ</strong>ได้</li>
+            <li>UI test เจอบั๊กจริง 2 ตัว: เอกสารรุ่นเก่าที่ query มองไม่เห็นทั้งที่ rules ยอม และ modal ที่ถูกขังใต้ topbar 200ms ระหว่าง animation</li>
+            <li>ชุด <code>public-boundary</code> 24 เคส พิสูจน์ว่าเส้นแบ่งสิทธิ์คือ "ยังไม่มีสังกัด" ไม่ใช่ "ยังไม่ล็อกอิน"</li>
+          </ul>
+          <div class="tags"><span>Firestore Rules</span><span>Playwright</span><span>Vitest</span><span>Firebase Emulator</span></div>
+          <a class="link" href="https://github.com/NNEWNERR/multitenant-booking-qa">ดู repo →</a>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <h3>qa-automation</h3>
+            <span class="badge">public</span>
+          </div>
+          <p class="count"><b>32</b> tests ใน 8 Playwright projects</p>
+          <p>API contract, UI, accessibility (axe-core), visual regression, smoke และ auth แยกตาม role ด้วย <code>storageState</code> CI รัน 4 shard ขนาน แล้ว merge blob report กลับเป็นรายงาน HTML ฉบับเดียว</p>
+          <ul>
+            <li>เทสติด tag (<code>@smoke</code> <code>@regression</code> <code>@a11y</code> <code>@visual</code>) เลือกรันทีละชั้นได้</li>
+            <li>ต่อ <strong>Playwright Test Agents</strong> (planner → generator → healer) พร้อมกติกาประจำ repo: healer ซ่อม locator ได้ แต่ห้ามแก้ค่าที่คาดหวัง ลด assertion หรือเพิ่ม retry</li>
+          </ul>
+          <div class="tags"><span>Playwright</span><span>TypeScript</span><span>axe-core</span><span>GitHub Actions</span></div>
+          <a class="link" href="https://github.com/NNEWNERR/qa-automation">ดู repo →</a>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <h3>sauce-demo-tests</h3>
+            <span class="badge">public</span>
+          </div>
+          <p class="count"><b>16</b> tests · 4 Page Object · เอกสารกลยุทธ์ 1 ฉบับ</p>
+          <p>ครอบคลุม login, การเรียงสินค้า, ตะกร้า และ checkout พร้อม visual + accessibility check บน <code>BasePage</code> ร่วมกัน</p>
+          <ul>
+            <li><code>TESTING.md</code> — เอกสารกลยุทธ์การทดสอบที่มีขอบเขต, risk matrix และ test pyramid</li>
+          </ul>
+          <div class="tags"><span>Playwright</span><span>TypeScript</span></div>
+          <a class="link" href="https://github.com/NNEWNERR/sauce-demo-tests">ดู repo →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="cases">
+    <div class="wrap">
+      <h2>Case studies — บั๊กจริงจากระบบที่ใช้งานอยู่</h2>
+      <p class="section-lede">โค้ดของระบบลูกค้าเอามาแสดงไม่ได้ แต่<strong>วิธีคิดตอนไล่หาสาเหตุ</strong>เล่าได้ ทุกเคสเรียงตามลำดับเดียวกัน: อาการ → ตามรอย → สาเหตุราก → แก้ → ยืนยัน → บทเรียน</p>
+      <div class="cases">
+        <a class="case" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/01-auth-race-condition.md">
+          <span class="id">CS-01</span>
+          <h3>login ล้มแบบสุ่ม 1 ใน N ครั้ง — race condition ระหว่าง session สองเส้น</h3>
+          <p>แยกให้ออกว่า "เทสไม่นิ่ง" หรือ "ระบบไม่นิ่ง" ก่อนใส่ retry</p>
+        </a>
+        <a class="case" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/02-role-silent-failures.md">
+          <span class="id">CS-02</span>
+          <h3>เพิ่ม role ใหม่ 1 ตัว พังเงียบ 6 จุด</h3>
+          <p>decision table (role × หน้าจอ), เคส refresh / deep link</p>
+        </a>
+        <a class="case" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/03-slot-leak.md">
+          <span class="id">CS-03</span>
+          <h3>คิวเต็มทั้งที่งานยกเลิกแล้ว — ที่นั่งค้าง 640 รายการ</h3>
+          <p>state-transition testing, remediation แบบ idempotent</p>
+        </a>
+        <a class="case" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/04-tenant-isolation.md">
+          <span class="id">CS-04</span>
+          <h3>กันข้อมูลข้ามองค์กรรั่ว — ทดสอบ 3 ชั้น เจอบั๊กครบ 3 ชั้น</h3>
+          <p>negative testing, rules test บน emulator (91 เคส), defense in depth</p>
+        </a>
+        <a class="case" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/05-zombie-service-worker.md">
+          <span class="id">CS-05</span>
+          <h3>deploy แล้วบางเครื่องเห็นหน้าเก่า — service worker ที่ตายไม่ลง</h3>
+          <p>แยกตัวแปรด้วย incognito, ยืนยันที่ HTTP header</p>
+        </a>
+        <a class="case" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/06-mobile-only-unclickable-button.md">
+          <span class="id">CS-06</span>
+          <h3>ปุ่มที่ "มองเห็น" แต่ "กดไม่ได้" และเกิดเฉพาะบนมือถือ</h3>
+          <p>hit-testing แทน visibility, ทดสอบแยกตามขนาดจอ</p>
+        </a>
+        <a class="case" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/07-legacy-escape-hatches.md">
+          <span class="id">CS-07</span>
+          <h3>สิทธิ์ของระบบรุ่นเก่าที่ลืมปิด — คนไม่ล็อกอินอ่านข้อมูลลูกค้าได้ทั้งหมด</h3>
+          <p>security rules review, mutation check (กฎเดิมแดง 15 เคส), blast radius</p>
+        </a>
+        <a class="case" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/08-test-blamed-the-system.md">
+          <span class="id">CS-08</span>
+          <h3>เทสฟ้องว่า "จองซ้อนได้" ทั้งที่ระบบถูก — บั๊กของเทส 4 ชั้น</h3>
+          <p>ยิง API ตรงแยกระบบออกจากเทส, event-driven assertion, test-data isolation</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="approach">
+    <div class="wrap">
+      <h2>สิ่งที่ผมให้ความสำคัญมากกว่าจำนวนเทส</h2>
+      <p class="section-lede">จอแดงต้องหมายถึงบั๊กจริงเสมอ ถ้าทีมเริ่มชินกับการเห็นแดง ชุดเทสก็หมดค่า</p>
+      <div class="principles">
+        <div class="principle">
+          <h3>Skip แทน fail เมื่อ dependency ไม่พร้อม</h3>
+          <p>เทสที่ล้มเพราะสภาพแวดล้อมกับเทสที่ล้มเพราะบั๊ก หน้าตาในรายงานเหมือนกัน การ skip พร้อมเหตุผลทำให้แยกสองอย่างนี้ออกจากกันได้</p>
+        </div>
+        <div class="principle">
+          <h3>Flake จากระบบภายนอก บันทึกไว้ ไม่กลบด้วย retry</h3>
+          <p>retry ที่ใส่เพื่อให้ผ่าน จะบังบั๊กจริงที่เกิดในเทสตัวเดียวกันด้วย</p>
+        </div>
+        <div class="principle">
+          <h3>Screenshot baseline ผูกกับ OS เสมอ</h3>
+          <p>เพราะการ render ฟอนต์ต่างกันจริง baseline ที่สร้างใหม่ตัวเองทุก push ทำให้ visual regression ไม่มีความหมาย</p>
+        </div>
+      </div>
+
+      <div class="threads">
+        <h3>เส้นที่ร้อยทุก case study</h3>
+        <ul>
+          <li>บั๊กที่ "เจอบ้างไม่เจอบ้าง" คือบั๊กที่ต้องสืบ ไม่ใช่บั๊กที่ต้องกลบ <small>CS-01</small></li>
+          <li>เส้นทางย้อนกลับ (ยกเลิก / ปฏิเสธ / refresh) คือที่ที่บั๊กชอบอยู่ <small>CS-02 · CS-03</small></li>
+          <li>ยืนยันด้วยสิ่งที่วัดได้ ไม่ใช่ด้วยสายตา — header, ตัวที่รับคลิกจริง, ผลลัพธ์ที่ต้องถูกปฏิเสธ <small>CS-04 · CS-05 · CS-06</small></li>
+          <li>"ผ่าน" ของเครื่องมือ ไม่เท่ากับ "ใช้งานได้" ของผู้ใช้ <small>CS-06</small></li>
+          <li>เทสที่ฟ้องบั๊กร้ายแรง ต้องพิสูจน์ที่ระบบก่อน <small>CS-08</small></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <h2>เกี่ยวกับผม</h2>
+      <div class="about">
+        <div>
+          <h3>ประสบการณ์</h3>
+          <ul class="timeline">
+            <li><b>Frontend Developer — startup, 1 ปี</b><span>พัฒนาและส่งมอบฟีเจอร์ด้วย Angular, Ionic และ Tailwind CSS บน Firebase</span></li>
+            <li><b>Event Organizer / Project Coordinator — ร้านนายกิจสติ๊กเกอร์</b><span>เอกสารก่อนงาน, รายงานสรุปโปรเจกต์ และข้อมูลแบบสำรวจ</span></li>
+          </ul>
+          <h3 style="margin-top:20px">กำลังศึกษาเพิ่มเติม</h3>
+          <p style="margin:0;color:var(--muted)">equivalence partitioning, boundary value analysis, decision table, state transition, risk-based testing, การเขียนรายงานบั๊ก และ exploratory testing</p>
+        </div>
+        <div>
+          <h3>Tech stack</h3>
+          <p class="stack-label">Testing & Automation</p>
+          <div class="stack"><span>Playwright</span><span>TypeScript</span><span>Cypress</span><span>Selenium</span><span>Postman / Newman</span><span>axe-core</span><span>Vitest</span><span>GitHub Actions</span></div>
+          <p class="stack-label">Development</p>
+          <div class="stack"><span>Angular</span><span>Ionic</span><span>JavaScript</span><span>Tailwind CSS</span><span>Firebase</span><span>Git</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2>คุยกันได้ครับ</h2>
+      <p class="section-lede" style="margin:0 auto 28px">เปิดรับตำแหน่ง Automation QA / SDET ยินดีเปิด repo private ให้ดูและอธิบายตอนสัมภาษณ์</p>
+      <div class="actions">
+        <a class="btn primary" href="mailto:newnertg@gmail.com">ส่งอีเมล</a>
+        <a class="btn" href="https://github.com/NNEWNERR">GitHub</a>
+        <a class="btn" href="https://www.facebook.com/tgtongja">Facebook</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 ศุภากร เศวตวงศ์สกุล · สร้างด้วย HTML/CSS ล้วน ไม่มี build step</div>
+</footer>
+
+</body>
+</html>
