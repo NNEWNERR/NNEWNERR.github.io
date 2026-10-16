@@ -9,7 +9,11 @@
 //
 // usage: node publish-test-stats.mjs --suite <id> --repo <name> --label <text>
 //                                    --kind playwright|vitest --file <report.json>
-//                                    [--inventory <list.json>]
+//                                    [--inventory <list.json>] [--private]
+//
+// --file may be a comma-separated list (e.g. one report per matrix job); the
+// counts are summed. --private omits commit and run URL: on a private repo the
+// link would 404 for visitors and the SHA means nothing to them.
 //
 // --inventory takes the json output of `playwright test --list` and records
 // how many tests the repo *defines* — including ones CI filters out (e.g.
@@ -22,16 +26,19 @@ import { readFileSync } from 'node:fs'
 
 const PROJECT = 'supakorn-portfolio'
 
-const args = Object.fromEntries(
-  process.argv.slice(2).reduce((pairs, v, i, all) => (i % 2 ? pairs : [...pairs, [v.replace(/^--/, ''), all[i + 1]]]), []),
-)
+const FLAGS = new Set(['private'])
+const args = {}
+for (let i = 2; i < process.argv.length; i++) {
+  const key = process.argv[i].replace(/^--/, '')
+  args[key] = FLAGS.has(key) ? true : process.argv[++i]
+}
 for (const key of ['suite', 'repo', 'label', 'kind', 'file']) {
   if (!args[key]) throw new Error(`missing --${key}`)
 }
 const token = process.env.FIRESTORE_TOKEN
 if (!token) throw new Error('FIRESTORE_TOKEN is not set')
 
-const report = JSON.parse(readFileSync(args.file, 'utf8'))
+const files = args.file.split(',').map((f) => f.trim()).filter(Boolean)
 
 function count(kind, r) {
   if (kind === 'playwright') {
@@ -49,7 +56,11 @@ function count(kind, r) {
   throw new Error(`unknown --kind ${kind}`)
 }
 
-const c = count(args.kind, report)
+const c = { passed: 0, failed: 0, flaky: 0, skipped: 0 }
+for (const file of files) {
+  const one = count(args.kind, JSON.parse(readFileSync(file, 'utf8')))
+  for (const k of Object.keys(c)) c[k] += one[k]
+}
 const total = c.passed + c.failed + c.flaky + c.skipped
 if (total === 0) throw new Error(`${args.file} reports 0 tests — refusing to publish an empty run`)
 
@@ -66,7 +77,8 @@ const inventory = args.inventory ? listed(args.inventory) : total
 if (inventory < total) throw new Error(`inventory ${inventory} < tests run ${total} — wrong --inventory file?`)
 
 const env = process.env
-const runUrl = env.GITHUB_RUN_ID
+const inCI = !!env.GITHUB_RUN_ID
+const runUrl = inCI && !args.private
   ? `${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}/actions/runs/${env.GITHUB_RUN_ID}`
   : null
 
@@ -82,9 +94,9 @@ const fields = {
   flaky: int(c.flaky),
   skipped: int(c.skipped),
   status: str(c.failed > 0 ? 'failed' : 'passed'),
-  commit: str(env.GITHUB_SHA?.slice(0, 7) ?? null),
+  commit: str(args.private ? null : env.GITHUB_SHA?.slice(0, 7) ?? null),
   runUrl: str(runUrl),
-  source: str(runUrl ? 'ci' : 'local'),
+  source: str(inCI ? 'ci' : 'local'),
   updatedAt: { timestampValue: new Date().toISOString() },
 }
 
