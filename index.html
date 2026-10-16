@@ -101,6 +101,18 @@
   .card .link { font-weight: 600; font-size: 15px; margin-top: 14px; }
   .note { font-size: 14.5px; color: var(--muted); border-left: 3px solid var(--line); padding-left: 12px; }
 
+  .live { font-size: 14px; margin: -6px 0 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; color: var(--muted); }
+  .live[hidden] { display: none; }
+  .live .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex: none; }
+  .live.failed .dot { background: #d64545; }
+  .live.manual .dot { background: var(--muted); }
+  .live b { color: var(--text); font-weight: 600; }
+  .live a { font-size: 14px; }
+  .stats-note { font-size: 13.5px; color: var(--muted); margin: -12px 0 24px; display: flex; align-items: center; gap: 8px; }
+  .stats-note .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+  @media (prefers-reduced-motion: no-preference) { .stats-note .dot { animation: pulse 2s ease-in-out infinite; } }
+  @keyframes pulse { 50% { opacity: .35; } }
+
   /* case studies */
   .cases { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
   @media (max-width: 800px) { .cases { grid-template-columns: 1fr; } }
@@ -178,11 +190,12 @@
 
   <div class="wrap">
     <div class="stats" role="list" aria-label="ภาพรวมผลงาน">
-      <div class="stat" role="listitem"><b>327</b><span>automated tests</span></div>
+      <div class="stat" role="listitem"><b id="stat-total">327</b><span id="stat-total-label">automated tests</span></div>
       <div class="stat" role="listitem"><b>4</b><span>repo พร้อม CI</span></div>
       <div class="stat" role="listitem"><b>7</b><span>CI workflow</span></div>
       <div class="stat" role="listitem"><b>8</b><span>case study บั๊กจริง</span></div>
     </div>
+    <p class="stats-note" id="stats-note" hidden><span class="dot" aria-hidden="true"></span><span></span></p>
   </div>
 
   <section id="work">
@@ -197,6 +210,7 @@
             <span class="badge private">private · ระบบลูกค้า</span>
           </div>
           <p class="count"><b>96</b> E2E/API tests ใน 36 spec files · <b>90</b> Firestore rules tests · <b>53</b> test case อ้างอิง TC-ID</p>
+          <p class="live" data-suites="krungthon-e2e,krungthon-rules" hidden></p>
           <p>ชุดเทสของแพลตฟอร์มจองคิวบน Firebase ที่ใช้งานจริง ครอบคลุม auth, การจอง, สิทธิ์การเข้าถึง, การจองชนกันแบบ concurrent, การแยกข้อมูลระหว่าง tenant, a11y, mobile responsive และการยิง API ตรงไปที่ Cloud Functions</p>
           <ul>
             <li>CI 4 workflow — matrix 17 ชุดตอน PR, rules 90 เคสบน emulator ทุก push, แจ้งเตือนเข้า Discord</li>
@@ -212,6 +226,7 @@
             <span class="badge">public</span>
           </div>
           <p class="count"><b>93</b> tests สองชั้นของระบบเดียวกัน</p>
+          <p class="live" data-suites="mtb-rules,mtb-ui" hidden></p>
           <p>76 tests ของ Firestore security rules + 17 Playwright UI tests (desktop + Pixel 7) รันกับ emulator จริงทั้งคู่ ไม่ใช่ mock — <code>npm ci && npm test</code> จบ ไม่ต้องมี credential</p>
           <ul>
             <li>เป็นเจ้าของทั้ง stack จึง seed ข้อมูลรุ่นเก่า สลับ role และ assert สิ่งที่<strong>ต้องถูกปฏิเสธ</strong>ได้</li>
@@ -228,6 +243,7 @@
             <span class="badge">public</span>
           </div>
           <p class="count"><b>32</b> tests ใน 8 Playwright projects</p>
+          <p class="live" data-suites="qa-automation" hidden></p>
           <p>API contract, UI, accessibility (axe-core), visual regression, smoke และ auth แยกตาม role ด้วย <code>storageState</code> CI รัน 4 shard ขนาน แล้ว merge blob report กลับเป็นรายงาน HTML ฉบับเดียว</p>
           <ul>
             <li>เทสติด tag (<code>@smoke</code> <code>@regression</code> <code>@a11y</code> <code>@visual</code>) เลือกรันทีละชั้นได้</li>
@@ -243,6 +259,7 @@
             <span class="badge">public</span>
           </div>
           <p class="count"><b>16</b> tests · 4 Page Object · เอกสารกลยุทธ์ 1 ฉบับ</p>
+          <p class="live" data-suites="sauce-demo-tests" hidden></p>
           <p>ครอบคลุม login, การเรียงสินค้า, ตะกร้า และ checkout พร้อม visual + accessibility check บน <code>BasePage</code> ร่วมกัน</p>
           <ul>
             <li><code>TESTING.md</code> — เอกสารกลยุทธ์การทดสอบที่มีขอบเขต, risk matrix และ test pyramid</li>
@@ -376,5 +393,72 @@
   <div class="wrap">© 2026 ศุภากร เศวตวงศ์สกุล · สร้างด้วย HTML/CSS ล้วน ไม่มี build step</div>
 </footer>
 
+<script>
+  // Live test stats: CI in each repo writes its latest run on main to
+  // Firestore (supakorn-portfolio / suites). Read-only via the REST API; if it
+  // fails, the static numbers above stay as they are.
+  (async () => {
+    const API = 'https://firestore.googleapis.com/v1/projects/supakorn-portfolio/databases/(default)/documents/suites?pageSize=50&key=AIzaSyALoHZhZ_BigofqWyTI29wDvGIc4Kcf9Wk'
+    let docs
+    try {
+      const res = await fetch(API)
+      if (!res.ok) return
+      docs = (await res.json()).documents ?? []
+    } catch { return }
+
+    const val = (f) => f == null ? null : f.integerValue != null ? Number(f.integerValue) : f.stringValue ?? f.timestampValue ?? null
+    const suites = Object.fromEntries(docs.map((d) => {
+      const o = {}
+      for (const [k, f] of Object.entries(d.fields ?? {})) o[k] = val(f)
+      return [d.name.split('/').pop(), o]
+    }))
+    if (!Object.keys(suites).length) return
+
+    const fmt = new Intl.NumberFormat('th-TH')
+    const ago = (iso) => {
+      const s = (Date.now() - new Date(iso)) / 1000
+      const rtf = new Intl.RelativeTimeFormat('th', { numeric: 'auto' })
+      if (s < 3600) return rtf.format(-Math.max(1, Math.round(s / 60)), 'minute')
+      if (s < 86400) return rtf.format(-Math.round(s / 3600), 'hour')
+      return rtf.format(-Math.round(s / 86400), 'day')
+    }
+    const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]))
+
+    document.querySelectorAll('.live[data-suites]').forEach((el) => {
+      const rows = el.dataset.suites.split(',').map((id) => suites[id]).filter(Boolean)
+      if (!rows.length) return
+      const manual = rows.every((r) => r.source === 'manual')
+      const failed = rows.some((r) => r.status === 'failed')
+      const latest = rows.map((r) => r.updatedAt).sort().pop()
+      el.classList.toggle('manual', manual)
+      el.classList.toggle('failed', failed)
+      let html = '<span class="dot" aria-hidden="true"></span>'
+      if (manual) {
+        html += `<span>repo private — ตัวเลขบันทึกมือ ${ago(latest)}</span>`
+      } else {
+        const sum = (k) => rows.reduce((n, r) => n + (r[k] ?? 0), 0)
+        const parts = [`<b>${fmt.format(sum('passed'))} passed</b>`]
+        if (sum('failed')) parts.push(`<b>${fmt.format(sum('failed'))} failed</b>`)
+        if (sum('flaky')) parts.push(`${fmt.format(sum('flaky'))} flaky`)
+        if (sum('skipped')) parts.push(`${fmt.format(sum('skipped'))} skipped`)
+        const where = rows.every((r) => r.source === 'ci') ? 'CI ล่าสุด' : 'รันล่าสุด'
+        html += `<span>${where}: ${parts.join(' · ')} · ${ago(latest)}</span>`
+        const run = rows.find((r) => r.runUrl)
+        if (run) html += `<a href="${esc(run.runUrl)}">ดู run →</a>`
+      }
+      el.innerHTML = html
+      el.hidden = false
+    })
+
+    const all = Object.values(suites)
+    const total = all.reduce((n, r) => n + (r.total ?? 0), 0)
+    document.getElementById('stat-total').textContent = fmt.format(total)
+    document.getElementById('stat-total-label').textContent = 'automated tests · ข้อมูลสด'
+    const note = document.getElementById('stats-note')
+    const newest = all.map((r) => r.updatedAt).filter(Boolean).sort().pop()
+    note.lastElementChild.textContent = `ดึงจาก Firestore — CI ของแต่ละ repo อัปเดตทุกครั้งที่ push เข้า main · ล่าสุด ${ago(newest)}`
+    note.hidden = false
+  })()
+</script>
 </body>
 </html>

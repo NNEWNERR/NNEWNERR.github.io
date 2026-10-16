@@ -1,0 +1,15 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Public, read-only test stats. Only CI writes them, through the
+    // Firestore REST API as a service account (IAM-authorised, so these
+    // rules never grant a browser any write).
+    match /suites/{suiteId} {
+      allow read: if true;
+      allow write: if false;
+    }
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
