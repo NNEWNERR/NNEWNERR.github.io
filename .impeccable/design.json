@@ -1,0 +1,342 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-16T14:48:24+00:00",
+  "title": "Design System: Supakorn Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "passing-green": {
+        "role": "primary",
+        "displayName": "Passing Green",
+        "canonical": "#1f7a4d",
+        "tonalRamp": [
+          "color-mix(in oklch, #1f7a4d, black 70%)",
+          "color-mix(in oklch, #1f7a4d, black 50%)",
+          "color-mix(in oklch, #1f7a4d, black 30%)",
+          "color-mix(in oklch, #1f7a4d, black 10%)",
+          "color-mix(in oklch, #1f7a4d, white 20%)",
+          "color-mix(in oklch, #1f7a4d, white 45%)",
+          "color-mix(in oklch, #1f7a4d, white 70%)",
+          "color-mix(in oklch, #1f7a4d, white 90%)"
+        ]
+      },
+      "passing-green-dark": {
+        "role": "primary",
+        "displayName": "Passing Green (dark)",
+        "canonical": "#4fc386"
+      },
+      "passing-tint": {
+        "role": "primary",
+        "displayName": "Passing Tint",
+        "canonical": "#e3f1e9",
+        "tonalRamp": [
+          "color-mix(in oklch, #e3f1e9, black 70%)",
+          "color-mix(in oklch, #e3f1e9, black 50%)",
+          "color-mix(in oklch, #e3f1e9, black 30%)",
+          "color-mix(in oklch, #e3f1e9, black 10%)",
+          "color-mix(in oklch, #e3f1e9, white 20%)",
+          "color-mix(in oklch, #e3f1e9, white 45%)",
+          "color-mix(in oklch, #e3f1e9, white 70%)",
+          "color-mix(in oklch, #e3f1e9, white 90%)"
+        ]
+      },
+      "passing-tint-dark": {
+        "role": "primary",
+        "displayName": "Passing Tint (dark)",
+        "canonical": "#183326"
+      },
+      "lab-paper": {
+        "role": "neutral",
+        "displayName": "Lab Paper",
+        "canonical": "#f7f7f4",
+        "tonalRamp": [
+          "color-mix(in oklch, #f7f7f4, black 70%)",
+          "color-mix(in oklch, #f7f7f4, black 50%)",
+          "color-mix(in oklch, #f7f7f4, black 30%)",
+          "color-mix(in oklch, #f7f7f4, black 10%)",
+          "color-mix(in oklch, #f7f7f4, white 20%)",
+          "color-mix(in oklch, #f7f7f4, white 45%)",
+          "color-mix(in oklch, #f7f7f4, white 70%)",
+          "color-mix(in oklch, #f7f7f4, white 90%)"
+        ]
+      },
+      "lab-paper-dark": {
+        "role": "neutral",
+        "displayName": "Lab Paper (dark)",
+        "canonical": "#121413"
+      },
+      "clean-sheet": {
+        "role": "neutral",
+        "displayName": "Clean Sheet",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "color-mix(in oklch, #ffffff, black 70%)",
+          "color-mix(in oklch, #ffffff, black 50%)",
+          "color-mix(in oklch, #ffffff, black 30%)",
+          "color-mix(in oklch, #ffffff, black 10%)",
+          "color-mix(in oklch, #ffffff, white 20%)",
+          "color-mix(in oklch, #ffffff, white 45%)",
+          "color-mix(in oklch, #ffffff, white 70%)",
+          "color-mix(in oklch, #ffffff, white 90%)"
+        ]
+      },
+      "clean-sheet-dark": {
+        "role": "neutral",
+        "displayName": "Clean Sheet (dark)",
+        "canonical": "#1a1d1b"
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#1b1d1c",
+        "tonalRamp": [
+          "color-mix(in oklch, #1b1d1c, black 70%)",
+          "color-mix(in oklch, #1b1d1c, black 50%)",
+          "color-mix(in oklch, #1b1d1c, black 30%)",
+          "color-mix(in oklch, #1b1d1c, black 10%)",
+          "color-mix(in oklch, #1b1d1c, white 20%)",
+          "color-mix(in oklch, #1b1d1c, white 45%)",
+          "color-mix(in oklch, #1b1d1c, white 70%)",
+          "color-mix(in oklch, #1b1d1c, white 90%)"
+        ]
+      },
+      "ink-dark": {
+        "role": "neutral",
+        "displayName": "Ink (dark)",
+        "canonical": "#e8ebe9"
+      },
+      "pencil-gray": {
+        "role": "neutral",
+        "displayName": "Pencil Gray",
+        "canonical": "#5b625f",
+        "tonalRamp": [
+          "color-mix(in oklch, #5b625f, black 70%)",
+          "color-mix(in oklch, #5b625f, black 50%)",
+          "color-mix(in oklch, #5b625f, black 30%)",
+          "color-mix(in oklch, #5b625f, black 10%)",
+          "color-mix(in oklch, #5b625f, white 20%)",
+          "color-mix(in oklch, #5b625f, white 45%)",
+          "color-mix(in oklch, #5b625f, white 70%)",
+          "color-mix(in oklch, #5b625f, white 90%)"
+        ]
+      },
+      "pencil-gray-dark": {
+        "role": "neutral",
+        "displayName": "Pencil Gray (dark)",
+        "canonical": "#9aa39f"
+      },
+      "ruled-line": {
+        "role": "neutral",
+        "displayName": "Ruled Line",
+        "canonical": "#e2e4df",
+        "tonalRamp": [
+          "color-mix(in oklch, #e2e4df, black 70%)",
+          "color-mix(in oklch, #e2e4df, black 50%)",
+          "color-mix(in oklch, #e2e4df, black 30%)",
+          "color-mix(in oklch, #e2e4df, black 10%)",
+          "color-mix(in oklch, #e2e4df, white 20%)",
+          "color-mix(in oklch, #e2e4df, white 45%)",
+          "color-mix(in oklch, #e2e4df, white 70%)",
+          "color-mix(in oklch, #e2e4df, white 90%)"
+        ]
+      },
+      "ruled-line-dark": {
+        "role": "neutral",
+        "displayName": "Ruled Line (dark)",
+        "canonical": "#2a2f2c"
+      },
+      "caution-amber": {
+        "role": "status",
+        "displayName": "Caution Amber",
+        "canonical": "#9a5b00",
+        "tonalRamp": [
+          "color-mix(in oklch, #9a5b00, black 70%)",
+          "color-mix(in oklch, #9a5b00, black 50%)",
+          "color-mix(in oklch, #9a5b00, black 30%)",
+          "color-mix(in oklch, #9a5b00, black 10%)",
+          "color-mix(in oklch, #9a5b00, white 20%)",
+          "color-mix(in oklch, #9a5b00, white 45%)",
+          "color-mix(in oklch, #9a5b00, white 70%)",
+          "color-mix(in oklch, #9a5b00, white 90%)"
+        ]
+      },
+      "caution-amber-dark": {
+        "role": "status",
+        "displayName": "Caution Amber (dark)",
+        "canonical": "#e0a64b"
+      },
+      "failing-red": {
+        "role": "status",
+        "displayName": "Failing Red",
+        "canonical": "#c43c3c",
+        "tonalRamp": [
+          "color-mix(in oklch, #c43c3c, black 70%)",
+          "color-mix(in oklch, #c43c3c, black 50%)",
+          "color-mix(in oklch, #c43c3c, black 30%)",
+          "color-mix(in oklch, #c43c3c, black 10%)",
+          "color-mix(in oklch, #c43c3c, white 20%)",
+          "color-mix(in oklch, #c43c3c, white 45%)",
+          "color-mix(in oklch, #c43c3c, white 70%)",
+          "color-mix(in oklch, #c43c3c, white 90%)"
+        ]
+      },
+      "failing-red-dark": {
+        "role": "status",
+        "displayName": "Failing Red (dark)",
+        "canonical": "#ef7b7b"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "ชื่อบนหน้าแรกและหัวหน้า Docs เท่านั้น"
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "หัวข้อ section"
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "ชื่อโปรเจกต์ใน card, หัวข้อย่อย"
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "เนื้อหา; line-height 1.75 สำหรับภาษาไทย"
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "badge, tag, เวลาอัปเดต"
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "โค้ด คำสั่ง ชื่อไฟล์เท่านั้น"
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "สีชื่อ case study ตอน hover (.2s); ปิดเมื่อ prefers-reduced-motion"
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "nav-collapse",
+        "value": "640px"
+      },
+      {
+        "name": "single-column",
+        "value": "800px"
+      },
+      {
+        "name": "docs-toc-stack",
+        "value": "860px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Action หลักหนึ่งปุ่มต่อกลุ่ม",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">ดูผลงาน</a>",
+      "css": ".ds-btn-primary{display:inline-flex;align-items:center;padding:11px 20px;border-radius:999px;background:var(--accent,#1f7a4d);color:#fff;font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--accent,#1f7a4d)}.ds-btn-primary:focus-visible{outline:2px solid var(--accent,#1f7a4d);outline-offset:3px}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "ลิงก์รอง เช่น GitHub, อีเมล",
+      "html": "<a class=\"ds-btn-secondary\" href=\"#\">GitHub</a>",
+      "css": ".ds-btn-secondary{display:inline-flex;align-items:center;padding:11px 20px;border-radius:999px;background:var(--surface,#fff);color:var(--text,#1b1d1c);border:1px solid var(--line,#e2e4df);font-weight:600;font-size:15px;text-decoration:none}.ds-btn-secondary:hover{border-color:var(--muted,#5b625f)}.ds-btn-secondary:focus-visible{outline:2px solid var(--accent,#1f7a4d);outline-offset:3px}"
+    },
+    {
+      "name": "Public Badge",
+      "kind": "chip",
+      "refersTo": "badge-public",
+      "description": "สถานะ repo public",
+      "html": "<span class=\"ds-badge\">public</span>",
+      "css": ".ds-badge{font-size:13px;font-weight:500;padding:3px 10px;border-radius:999px;background:var(--accent-soft,#e3f1e9);color:var(--accent,#1f7a4d)}"
+    },
+    {
+      "name": "Stack Tag",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "stack ใต้ card",
+      "html": "<span class=\"ds-tag\">Playwright</span>",
+      "css": ".ds-tag{font-size:13px;color:var(--muted,#5b625f);border:1px solid var(--line,#e2e4df);border-radius:6px;padding:2px 8px}"
+    },
+    {
+      "name": "Live Status Line",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "ผล CI รอบล่าสุดใต้หัว card",
+      "html": "<p class=\"ds-live\"><span class=\"ds-dot\"></span><span>CI ล่าสุด: <b>54 passed</b> · 3 skipped · 5 นาทีที่ผ่านมา</span> <a href=\"#\">ดู run →</a></p>",
+      "css": ".ds-live{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;font-size:14px;color:var(--muted,#5b625f);margin:0}.ds-live b{color:var(--text,#1b1d1c);font-weight:600}.ds-live a{color:var(--accent,#1f7a4d)}.ds-dot{width:8px;height:8px;border-radius:50%;background:var(--accent,#1f7a4d)}"
+    },
+    {
+      "name": "Case Study Row",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "แถวในสารบัญ case study",
+      "html": "<a class=\"ds-case\" href=\"#\"><b>เพิ่ม role ใหม่ 1 ตัว พังเงียบ 6 จุด</b><span class=\"ds-case-id\">CS-02</span><small>decision table (role × หน้าจอ)</small></a>",
+      "css": ".ds-case{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 24px;padding:18px 2px;border-bottom:1px solid var(--line,#e2e4df);color:var(--text,#1b1d1c);text-decoration:none}.ds-case b{font-size:18px;font-weight:600;transition:color .2s cubic-bezier(.16,1,.3,1)}.ds-case small{grid-column:1;font-size:15px;color:var(--muted,#5b625f)}.ds-case-id{grid-column:2;grid-row:1;font-size:14px;color:var(--muted,#5b625f);font-variant-numeric:tabular-nums}.ds-case:hover b,.ds-case:focus-visible b{color:var(--accent,#1f7a4d)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Lab Notebook",
+    "overview": "เว็บนี้คือสมุดบันทึกการทดลองของ QA คนหนึ่ง: ทุกหน้าเขียนเหมือนบันทึกที่คนอื่นเปิดตรวจได้ ตัวเลขมีที่มา ผลที่ล้มเหลวถูกจดไว้ข้างผลที่สำเร็จ และไม่มีอะไรถูกตกแต่งให้ดูดีเกินหลักฐาน ระบบดีไซน์จึงเงียบโดยตั้งใจ: กระดาษอุ่น หมึกเข้ม เส้นบรรทัดบาง และสีเขียวเพียงสีเดียวที่ปรากฏเมื่อมีบางอย่าง \"ผ่านการยืนยันแล้ว\"\n\nความหนาแน่นอยู่ระดับกลาง อ่านสบายบนมือถือที่ recruiter เปิดจากเรซูเม่ และละเอียดพอให้คนสายเทคนิคไล่อ่านได้ component ทุกตัวสุภาพและถอยให้เนื้อหา: ไม่มีเงา ไม่มีไล่สี ไม่มีการเคลื่อนไหวที่ไม่ได้สื่อสถานะ ความลึกเกิดจากเส้น 1px กับพื้นผิวสองระดับเท่านั้น\n\nสิ่งที่ปฏิเสธแล้ว (ยืนยันจากการ polish ด้วย Impeccable 2026-10-16): ป้าย eyebrow เหนือหัวข้อ, แถวตัวเลขใหญ่แบบ hero-metric, card ขนาดเท่ากันเป็นโครงหลักของหน้า, เส้นสีหนาด้านข้าง, emoji แทนไอคอน, monospace เพื่อให้ดู \"เทคนิค\"",
+    "keyCharacteristics": [
+      "สีเน้นสีเดียว (Passing Green) ใช้กับสิ่งที่ยืนยันแล้วหรือ action หลักเท่านั้น",
+      "แบนทั้งระบบ ความลึกมาจากเส้นบรรทัดและพื้นผิว ไม่ใช่เงา",
+      "ตัวอักษรตระกูลเดียว (IBM Plex Sans Thai) ลำดับชั้นมาจากขนาดและน้ำหนัก",
+      "ตัวเลขเป็นพระเอก: tabular, ตัวหนา, มีบรรทัดบอกที่มาอยู่ใกล้ๆ เสมอ",
+      "โหมดมืดเป็นชุด token เต็ม ไม่ใช่การกลับสี"
+    ],
+    "rules": [
+      {
+        "name": "The Passing Green Rule",
+        "body": "สีเขียวหมายถึง \"ยืนยันแล้ว\" หรือ \"ทำสิ่งนี้\" เท่านั้น ห้ามใช้เป็นสีตกแต่ง ถ้าสิ่งนั้นไม่ได้ผ่านการยืนยันหรือไม่ใช่ action ให้ใช้ Ink หรือ Pencil Gray",
+        "section": "colors"
+      },
+      {
+        "name": "The Status-Only Rule",
+        "body": "Amber และ Red ปรากฏเมื่อมีสถานะจริงให้สื่อ ไม่ใช่เพื่อเพิ่มสีสันให้หน้า",
+        "section": "colors"
+      },
+      {
+        "name": "The Measured Number Rule",
+        "body": "ตัวเลขที่เป็นหลักฐาน (จำนวนเทส, passed/skipped) ใช้ `tabular-nums` ตัวหนา และต้องมีบรรทัดบอกที่มาอยู่ติดกัน ตัวเลขที่ไม่มีที่มาไม่ได้รับการเน้น",
+        "section": "typography"
+      },
+      {
+        "name": "The Code-Only Mono Rule",
+        "body": "monospace ใช้กับสิ่งที่พิมพ์ลง terminal หรือไฟล์ได้จริงเท่านั้น ไม่ใช้กับป้าย ชื่อ หรือรหัสอ้างอิงเพื่อให้ดูเทคนิค",
+        "section": "typography"
+      },
+      {
+        "name": "The Ruled-Line Rule",
+        "body": "ถ้าต้องแยกสองสิ่งออกจากกัน ใช้เส้น 1px หรือเปลี่ยนพื้นผิวหนึ่งระดับ ห้ามใช้เงา ห้ามใช้เส้นหนาด้านข้าง",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** ใช้ Passing Green กับสิ่งที่ยืนยันแล้วหรือ action หลักเท่านั้น (The Passing Green Rule)",
+      "**Do** แยกพื้นผิวด้วยเส้น Ruled Line 1px และ Clean Sheet บน Lab Paper",
+      "**Do** ใส่บรรทัดบอกที่มาไว้ติดกับตัวเลขที่เป็นหลักฐานทุกตัว",
+      "**Do** ใช้ token ทุกสีผ่าน CSS custom property และให้มีค่าคู่สำหรับโหมดมืดเสมอ",
+      "**Do** ทดสอบที่ 390px ทุกครั้ง: ไม่มี horizontal scroll",
+      "**Do** ใช้ `line-height` อย่างน้อย 1.5 กับข้อความไทย"
+    ],
+    "donts": [
+      "**Don't** ใส่ป้าย eyebrow หรือ kicker เหนือหัวข้อ และไม่ใส่เลขลำดับ 01/02 ถ้าลำดับไม่มีความหมาย",
+      "**Don't** ใช้แถวตัวเลขใหญ่หลายช่องแบบ hero-metric — ตัวเลขอยู่ในประโยคที่มีบริบท",
+      "**Don't** ใช้ `box-shadow`, gradient text หรือ glass เป็นการตกแต่ง",
+      "**Don't** ใส่เส้นสีหนากว่า 1px ด้านข้าง card, callout หรือรายการ",
+      "**Don't** ใช้ emoji แทนไอคอน",
+      "**Don't** ใช้ monospace กับสิ่งที่ไม่ใช่โค้ด (The Code-Only Mono Rule)",
+      "**Don't** ทำ animation ที่วนไม่หยุด (เช่นจุดกะพริบ) — การเคลื่อนไหวต้องตอบสนองต่อการกระทำเท่านั้น"
+    ]
+  }
+}
