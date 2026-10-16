@@ -261,7 +261,7 @@ test('tenant B staff cannot READ a tenant A booking', async () =&gt; {
           <tr><td>คนเขียน</td><td>service account <code>ci-stats-writer@supakorn-portfolio.iam.gserviceaccount.com</code> (<code>roles/datastore.user</code>)</td></tr>
           <tr><td>WIF provider</td><td><code>projects/932862873750/locations/global/workloadIdentityPools/github/providers/github-oidc</code><br>condition: <code>repository_owner == 'NNEWNERR' &amp;&amp; ref == 'refs/heads/main'</code></td></tr>
           <tr><td>Script</td><td><code>ci/publish-test-stats.mjs</code> (ตัวหลัก) — แต่ละ repo copy ไปไว้ที่ <code>scripts/</code></td></tr>
-          <tr><td>suite id ปัจจุบัน</td><td><code>qa-automation</code>, <code>mtb-rules</code>, <code>mtb-ui</code>, <code>sauce-demo-tests</code>, <code>krungthon-e2e</code>*, <code>krungthon-rules</code>* (* บันทึกมือ)</td></tr>
+          <tr><td>suite id ปัจจุบัน</td><td><code>qa-automation</code>, <code>mtb-rules</code>, <code>mtb-ui</code>, <code>sauce-demo-tests</code>, <code>krungthon-e2e</code>†, <code>krungthon-rules</code>† († repo private — ส่งด้วย <code>--private</code> ไม่มี commit/ลิงก์ run)</td></tr>
         </tbody>
       </table></div>
       <div class="callout"><b>ทำไมไม่ใช้ service account key</b>key เป็น secret ที่อายุยาว รั่วแล้วใช้ได้จากทุกที่ ส่วน WIF ให้ GitHub ออก token อายุสั้นต่อ run และ Google ตรวจว่ามาจาก repo กับ branch ที่อนุญาตจริง ไม่มีอะไรให้รั่ว</div>
@@ -331,11 +331,13 @@ outputFile: { json: 'vitest-results.json' },</code></pre></li>
       </table></div>
       <h3>ดูข้อมูลดิบใน Firestore</h3>
 <pre><code>curl -s "https://firestore.googleapis.com/v1/projects/supakorn-portfolio/databases/(default)/documents/suites?key=AIzaSyALoHZhZ_BigofqWyTI29wDvGIc4Kcf9Wk"</code></pre>
-      <h3>อัปเดตตัวเลขที่บันทึกมือ (Krungthon Air)</h3>
-<pre><code>T=$(gcloud auth print-access-token)
-curl -X PATCH -H "Authorization: Bearer $T" -H "Content-Type: application/json" \
-  "https://firestore.googleapis.com/v1/projects/supakorn-portfolio/databases/(default)/documents/suites/krungthon-e2e?updateMask.fieldPaths=total&amp;updateMask.fieldPaths=updatedAt" \
-  -d '{"fields":{"total":{"integerValue":"96"},"updatedAt":{"timestampValue":"'"$(date -u +%FT%TZ)"'"}}}'</code></pre>
+      <h3>repo private และ CI แบบ matrix (Krungthon Air)</h3>
+      <ul>
+        <li>ทุก job ใน matrix อัปโหลด <code>results.json</code> เป็น artifact <code>stats-*</code> แล้ว job <code>publish-stats</code> (needs ทุก job) รวมไฟล์ด้วย <code>--file a.json,b.json,…</code></li>
+        <li><code>--private</code> ไม่ส่ง commit กับลิงก์ run เพราะคนดูเปิดไม่ได้ ส่งแค่ตัวเลข ไม่มีข้อมูลลูกค้า</li>
+        <li>CI รันแค่ project ที่อยู่ใน matrix ส่วน <code>inventory</code> (96) นับทุก project จาก <code>--list</code> เลยมี "รันจริง" น้อยกว่า "มีใน repo" ซึ่งถูกต้องตามนั้น</li>
+        <li>ถ้า smoke ล้ม job <code>full</code> จะถูกข้าม และผลที่ส่งไปจะมีแค่ smoke ซึ่งตรงกับที่เกิดขึ้นจริง</li>
+      </ul>
       <div class="callout warn"><b>API key ในหน้าเว็บไม่ใช่ความลับ</b>Firebase web API key แค่ระบุ project สิทธิ์จริงคุมด้วย rules ถ้าลองเขียนโดยไม่ล็อกอินจะได้ 403 (ทดสอบแล้วตอนติดตั้ง)</div>
     </article>
 
