@@ -1,0 +1,8 @@
+# Jekyll (GitHub Pages): keep working docs out of the published site
+exclude:
+  - PRODUCT.md
+  - DESIGN.md
+  - README.md
+  - ci/
+  - firestore.rules
+  - firebase.json
