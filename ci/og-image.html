@@ -1,0 +1,55 @@
+<!doctype html>
+<!-- Source for assets/og-image.png (1200×630). Rebuild: node ci/build-og-image.cjs -->
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Thai:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #f7f7f4; --surface: #fff; --text: #1b1d1c; --muted: #5b625f; --line: #e2e4df; --accent: #1f7a4d; --accent-soft: #e3f1e9; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1200px; height: 630px; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "IBM Plex Sans Thai", sans-serif;
+    padding: 72px 84px;
+    display: flex;
+    flex-direction: column;
+    /* faint notebook grid */
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 42px 42px;
+    background-position: -1px -1px;
+  }
+  .sheet {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 56px 64px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .url { font: 500 22px "IBM Plex Mono", monospace; color: var(--muted); display: flex; align-items: center; gap: 12px; }
+  .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 6px var(--accent-soft); }
+  h1 { font-size: 64px; font-weight: 700; line-height: 1.35; margin-top: 30px; letter-spacing: -0.5px; }
+  .role { font-size: 34px; font-weight: 500; color: var(--accent); margin-top: 4px; }
+  .stats { margin-top: auto; display: flex; gap: 14px; flex-wrap: wrap; }
+  .chip { font: 500 21px "IBM Plex Mono", monospace; padding: 9px 18px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg); }
+  .chip b { color: var(--accent); font-weight: 500; }
+</style>
+</head>
+<body>
+  <div class="sheet">
+    <div class="url"><span class="dot"></span>nnewnerr.github.io</div>
+    <h1>ศุภากร เศวตวงศ์สกุล</h1>
+    <div class="role">Automation QA Engineer</div>
+    <div class="stats">
+      <span class="chip"><b>358</b> automated tests</span>
+      <span class="chip"><b>8</b> case studies</span>
+      <span class="chip">Playwright + TypeScript</span>
+    </div>
+  </div>
+</body>
+</html>
