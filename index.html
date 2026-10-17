@@ -91,11 +91,11 @@
         <article class="card feature">
           <div class="card-top">
             <h3>Krungthon Air — QA suite</h3>
-            <span class="badge private">private · ระบบลูกค้า</span>
+            <span class="badge private">private · ร้านของผมเอง</span>
           </div>
-          <p class="outcome">ดูแลคุณภาพระบบจองคิวที่ลูกค้าใช้งานจริงทุกวัน และมีเทสยิงกับ production ทุกวันเพื่อจับปัญหาภายใน 24 ชั่วโมง</p>
+          <p class="outcome">ดูแลคุณภาพระบบจองคิวของร้านผมเองที่ลูกค้าใช้งานจริงทุกวัน และมีเทสยิงกับ production ทุกวันเพื่อจับปัญหาภายใน 24 ชั่วโมง</p>
           <p class="count">เทสใน repo: <b>96</b> E2E/API · <b>90</b> Firestore rules</p>
-          <p class="live" data-suites="krungthon-e2e,krungthon-rules" data-gap="ส่วนที่เหลือยิงกับ production หรือต้องใช้สิทธิ์ระบบลูกค้าเพิ่ม จึงรันแยกนอก CI" hidden></p>
+          <p class="live" data-suites="krungthon-e2e,krungthon-rules" data-gap="ส่วนที่เหลือยิงกับ production หรือต้องใช้สิทธิ์ production เพิ่ม จึงรันแยกนอก CI" hidden></p>
           <details class="more">
             <summary>รายละเอียดเทคนิค</summary>
             <p class="system"><b>ระบบที่ทดสอบ:</b> เว็บจองคิวช่างแอร์ ลูกค้าจองเองผ่านเว็บหรือ QR ของสาขา พนักงานจัดตารางช่าง และแจ้งเตือนผ่าน LINE · <a href="docs/#sys-krungthon">อธิบายระบบ</a></p>
@@ -105,7 +105,7 @@
               <li>CI 4 workflow: matrix 17 ชุดตอน PR, rules 90 เคสบน emulator ทุก push, แจ้งเตือนเข้า Discord</li>
               <li><strong>Daily soak ยิงกับ production ทุกวัน</strong> เพื่อจับ regression ภายใน 24 ชั่วโมง ไม่ต้องรอ PR ถัดไป</li>
             </ul>
-            <p class="note">repo เป็น private เพราะเป็นระบบลูกค้าที่ใช้งานจริง ยินดีเปิดให้ดูและอธิบายโครงสร้างเทส, TC-ID และ soak workflow ตอนสัมภาษณ์ ส่วนวิธีคิดเล่าไว้ใน <a href="#cases">case studies</a></p>
+            <p class="note">repo เป็น private เพราะเป็นระบบจริงของร้านผมเองและเกี่ยวกับข้อมูลลูกค้า ยินดีเปิดให้ดูและอธิบายโครงสร้างเทส, TC-ID และ soak workflow ตอนสัมภาษณ์ ส่วนวิธีคิดเล่าไว้ใน <a href="#cases">case studies</a></p>
           </details>
           <div class="tags"><span>Playwright</span><span>TypeScript</span><span>Firebase</span><span>Angular</span><span>GitHub Actions</span></div>
         </article>
@@ -179,7 +179,7 @@
   <section id="cases">
     <div class="wrap">
       <h2>Case studies: บั๊กจริงจากระบบที่ใช้งานอยู่</h2>
-      <p class="section-lede">โค้ดของระบบลูกค้าเอามาแสดงไม่ได้ แต่<strong>วิธีคิดตอนไล่หาสาเหตุ</strong>เล่าได้ ทุกเคสเรียงตามลำดับเดียวกัน: อาการ → ตามรอย → สาเหตุราก → แก้ → ยืนยัน → บทเรียน</p>
+      <p class="section-lede">โค้ดของระบบจริงที่มีข้อมูลลูกค้าเอามาแสดงไม่ได้ แต่<strong>วิธีคิดตอนไล่หาสาเหตุ</strong>เล่าได้ ทุกเคสเรียงตามลำดับเดียวกัน: อาการ → ตามรอย → สาเหตุราก → แก้ → ยืนยัน → บทเรียน</p>
       <div class="cases">
         <a class="case" id="cs-01" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/01-auth-race-condition.md">
           <h3>login ล้มแบบสุ่ม 1 ใน N ครั้ง: race condition ระหว่าง session สองเส้น</h3>

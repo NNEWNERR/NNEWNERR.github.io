@@ -129,7 +129,7 @@ components:
 - **Ruled Line**: เส้นแบ่ง ขอบ card ขอบตาราง เส้นใต้แถว case study — เส้นเดียวที่ระบบใช้สร้างความลึก
 
 ### Status (ใช้เฉพาะเมื่อสื่อสถานะ)
-- **Caution Amber**: badge "private · ระบบลูกค้า" และ callout ที่ต้องระวัง
+- **Caution Amber**: badge "private · ร้านของผมเอง" และ callout ที่ต้องระวัง
 - **Failing Red**: CI ที่ล้ม และป้าย "ไม่ทำ" ในตัวอย่าง do/don't — ผ่าน AA ทั้งสองโหมด
 
 ### Named Rules
@@ -195,7 +195,7 @@ components:
 - **Focus:** outline 2px Passing Green เว้นระยะ 3px
 
 ### Chips
-- **Badge:** แคปซูล พื้น Passing Tint ตัวอักษร Passing Green สำหรับ "public"; ชุด Amber สำหรับ "private · ระบบลูกค้า"
+- **Badge:** แคปซูล พื้น Passing Tint ตัวอักษร Passing Green สำหรับ "public"; ชุด Amber สำหรับ "private · ร้านของผมเอง"
 - **Tag:** ขอบ Ruled Line ตัวอักษร Pencil Gray มุมเล็ก ใช้บอก stack ใต้ card
 
 ### Cards / Containers
