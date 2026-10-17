@@ -198,7 +198,7 @@
         </a>
         <a class="case" id="cs-04" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/04-tenant-isolation.md">
           <h3>กันข้อมูลข้ามองค์กรรั่ว: ทดสอบ 3 ชั้น เจอบั๊กครบ 3 ชั้น</h3>
-          <p>negative testing, rules test บน emulator (91 เคส), defense in depth</p>
+          <p>negative testing, rules test บน emulator (90 เคส), defense in depth</p>
           <span class="id">CS-04</span>
         </a>
         <a class="case" id="cs-05" href="https://github.com/NNEWNERR/new.supakorn/blob/main/case-studies/05-zombie-service-worker.md">
@@ -318,11 +318,16 @@
     } catch { return }
 
     const val = (f) => f == null ? null : f.integerValue != null ? Number(f.integerValue) : f.stringValue ?? f.timestampValue ?? null
+    // Only suites a card on this page names count — a stray document in the
+    // collection can't inflate the headline total.
+    const known = new Set([...document.querySelectorAll('.live[data-suites]')].flatMap((el) => el.dataset.suites.split(',')))
     const suites = Object.fromEntries(docs.map((d) => {
       const o = {}
       for (const [k, f] of Object.entries(d.fields ?? {})) o[k] = val(f)
       return [d.name.split('/').pop(), o]
-    }))
+    }).filter(([id]) => known.has(id)))
+    // Run links come from the database, so only ever link to this account's repos.
+    const safeRunUrl = (u) => typeof u === 'string' && u.startsWith('https://github.com/NNEWNERR/') ? u : null
     if (!Object.keys(suites).length) return
 
     const fmt = new Intl.NumberFormat('th-TH')
@@ -354,8 +359,8 @@
         if (sum('flaky')) parts.push(`${fmt.format(sum('flaky'))} flaky`)
         if (sum('skipped')) parts.push(`${fmt.format(sum('skipped'))} skipped`)
         const where = rows.every((r) => r.source === 'ci') ? 'CI ล่าสุด' : 'รันล่าสุด'
-        const run = rows.find((r) => r.runUrl)
-        const link = run ? ` · <a href="${esc(run.runUrl)}">ดู run →</a>` : ''
+        const runUrl = rows.map((r) => safeRunUrl(r.runUrl)).find(Boolean)
+        const link = runUrl ? ` · <a href="${esc(runUrl)}">ดู run →</a>` : ''
         html += `<span>${where}: ${parts.join(' · ')} · ${when}${link}</span>`
         // Why the CI run is smaller than the repo count lives in the card's
         // details, so the headline line stays one number.
